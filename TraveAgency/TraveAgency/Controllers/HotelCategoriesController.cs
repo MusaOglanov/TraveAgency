@@ -50,6 +50,7 @@ namespace TraveAgency.Controllers
         #endregion
 
         #endregion
+        #region Update
 
         #region get
         public async Task<IActionResult> Update(int? id)
@@ -94,6 +95,8 @@ namespace TraveAgency.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+        #endregion
+
 
         #region Activity
         public async Task<IActionResult> Activity(int? id)

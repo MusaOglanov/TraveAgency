@@ -1,0 +1,28 @@
+﻿@model HotelRoomType
+
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <h6>Name</h6>
+        <h4>@Model.Name</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6>Price</h6>
+        <h4>@Model.Price</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6>Hotel</h6>
+        <h4>@Model.Hotel.Name</h4>
+    </div>
+</div>
+
+<div class="form-row ">
+    <div class="form-group col-md-6" style="text-align:center">
+        <h4 class="mb-4 text-md  ">Info</h4>
+        <h5>@Model.Description</h5>
+    </div>
+</div>
+
+
+
+<a asp-action="Index" class="btn btn-dark text-white">Go Back</a>
+

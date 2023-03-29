@@ -151,3 +151,7 @@ C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\bin\Debug\net5.0\runt
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\HotelCategories\Index.cshtml.g.cs
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\HotelCategories\Create.cshtml.g.cs
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\HotelCategories\Update.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\HotelRoomTypes\Index.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\HotelRoomTypes\Create.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\HotelRoomTypes\Update.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\HotelRoomTypes\Detail.cshtml.g.cs

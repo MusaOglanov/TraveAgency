@@ -1,4 +1,6 @@
-﻿namespace TraveAgency.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TraveAgency.Models
 {
     public class HotelRoomType
     {

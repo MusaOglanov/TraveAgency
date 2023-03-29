@@ -10,7 +10,7 @@ using TraveAgency.DAL;
 namespace TraveAgency.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230329150654_CreateHotelsTables")]
+    [Migration("20230329155939_CreateHotelsTables")]
     partial class CreateHotelsTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
