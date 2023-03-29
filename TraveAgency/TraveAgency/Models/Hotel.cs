@@ -19,7 +19,11 @@ namespace TraveAgency.Models
         public string Country { get; set; }
         public string City { get; set; }
         [NotMapped]
-        public IFormFile Photo { get; set; }
+        public List<IFormFile> Photo { get; set; }
         public bool IsDeactive { get; set; }
+        public Hotel()
+        {
+            Country = "Azərbaycan";
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace TraveAgency.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Star = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true, defaultValue: "Azərbaycan"),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeactive = table.Column<bool>(type: "bit", nullable: false)
                 },

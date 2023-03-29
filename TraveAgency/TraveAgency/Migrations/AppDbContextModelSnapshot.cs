@@ -30,7 +30,9 @@ namespace TraveAgency.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Azərbaycan");
 
                     b.Property<bool>("IsDeactive")
                         .HasColumnType("bit");

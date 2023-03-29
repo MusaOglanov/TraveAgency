@@ -10,7 +10,7 @@ using TraveAgency.DAL;
 namespace TraveAgency.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230329155939_CreateHotelsTables")]
+    [Migration("20230329213935_CreateHotelsTables")]
     partial class CreateHotelsTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,9 @@ namespace TraveAgency.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Azərbaycan");
 
                     b.Property<bool>("IsDeactive")
                         .HasColumnType("bit");

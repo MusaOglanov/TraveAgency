@@ -8,6 +8,9 @@ namespace TraveAgency.Models
         public string Name { get; set; }
         public List<HotelHotelCategory> HotelHotelCategories { get; set; }
         public bool IsDeactive { get; set;}
-      
+        public HotelCategory()
+        {
+            Name = "Azərbaycan";
+        }
     }
 }

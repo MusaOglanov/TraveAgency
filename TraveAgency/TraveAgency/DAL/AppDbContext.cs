@@ -15,5 +15,11 @@ namespace TraveAgency.DAL
         public DbSet<HotelDetail> HotelDetails { get; set; }
         public DbSet<HotelImage> HotelImages { get; set; }
         public DbSet<HotelRoomType> HotelRoomTypes { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Hotel>()
+                .Property(h => h.Country)
+                .HasDefaultValue("Azərbaycan");
+        }
     }
 }

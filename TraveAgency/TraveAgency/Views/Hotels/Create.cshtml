@@ -1,0 +1,156 @@
+﻿@model Hotel
+<div class="card-body">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Hotel  Create</h5>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label class="form-label" asp-for="Photo"></label>
+            <input accept="image/*" asp-for="Photo" class="form-control">
+            <span class="text-danger" asp-validation-for="Photo"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="Name"></label>
+            <input asp-for="Name" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="HotelDetail.IsDomestic"></label>
+            <input asp-for="HotelDetail.IsDomestic">
+            <span class="text-danger" asp-validation-for="HotelDetail.IsDomestic"></span>
+        </div>
+        <div class="form-group d-none" id="CountrId">
+            <label class="form-label" asp-for="Country"></label>
+            <input asp-for="Country" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Country"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="City"></label>
+            <input asp-for="City" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="City"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="HotelDetail.Adress"></label>
+            <input asp-for="HotelDetail.Adress" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="HotelDetail.Adress"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Categories</label>
+            <select  class="form-control" name="hotelCatsId[]">
+                @foreach (HotelCategory hotelCategory in ViewBag.HotelCategory)
+                {
+                    <option value="@hotelCategory.Id">@hotelCategory.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Hotel Room Type</label>
+            <select multiple class="form-control" name="hoteRoomTypesId[]">
+                @foreach (HotelRoomType hotelRoomType in ViewBag.HotelRoomType)
+                {
+                    <option value="@hotelRoomType.Id">@hotelRoomType.Name @hotelRoomType.Price</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+
+            <div class="form-group">
+                <label asp-for="HotelDetail.CheckInTime">Check in Time:</label>
+                <input asp-for="HotelDetail.CheckInTime" type="date" name="departureDate">
+                <span class="text-danger" asp-validation-for="HotelDetail.CheckInTime"></span>
+                
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HotelDetail.CheckOutTime">Arrival Flight Date:</label>
+                <input asp-for="HotelDetail.CheckOutTime" type="date" name="arrivalDate">
+                <span class="text-danger" asp-validation-for="HotelDetail.CheckOutTime"></span>
+              
+            </div>
+
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="HotelDetail.RoomAvailable">Room Available</label>
+            <input asp-for="HotelDetail.RoomAvailable">
+            <span class="text-danger" asp-validation-for="HotelDetail.RoomAvailable"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Star" class="form-label"></label>
+            <input asp-for="Star" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Star"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="HotelDetail.Rating" class="form-label"></label>
+            <input asp-for="HotelDetail.Rating" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="HotelDetail.Rating"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label class="form-label" asp-for="HotelDetail.Info"></label>
+            <textarea asp-for="HotelDetail.Info" type="text" class="form-control"></textarea>
+            <span class="text-danger" asp-validation-for="HotelDetail.Info"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="HotelDetail.Email"></label>
+            <input asp-for="HotelDetail.Email" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="HotelDetail.Email"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label asp-for="HotelDetail.PhoneNumber">Telephone</label>
+
+            <input asp-for="HotelDetail.PhoneNumber" type="tel" class="form-control">
+            <span class="text-danger" asp-validation-for="HotelDetail.PhoneNumber"></span>
+
+
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="HotelDetail.WebSite"></label>
+            <input asp-for="HotelDetail.WebSite" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="HotelDetail.WebSite"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Price"></label>
+
+            <input asp-for="Price" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Price"></span>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-action="index" class="btn btn-secondary text-white">Go Back</a>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        if ($('#HotelDetail_IsDomestic').prop('checked')) {
+            $('#CountrId').removeClass("d-none")
+        }
+        else {
+            $('#CountrId').addClass("d-none")
+            $('#HotelDetail_IsDomestic').removeClass("d-none")
+
+        }
+        $(document).on("change", "#HotelDetail_IsDomestic", function () {
+            if ($('#HotelDetail_IsDomestic').prop('checked')) {
+                $('#CountrId').removeClass("d-none")
+            }
+            else {
+                $('#CountrId').addClass("d-none")
+
+            }
+        });
+        
+    </script>
+}
