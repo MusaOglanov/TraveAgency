@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraveAgency", "TraveAgency\TraveAgency.csproj", "{D6F7A1CA-E55B-444A-B5A9-E5756E96ADBB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6F7A1CA-E55B-444A-B5A9-E5756E96ADBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6F7A1CA-E55B-444A-B5A9-E5756E96ADBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6F7A1CA-E55B-444A-B5A9-E5756E96ADBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6F7A1CA-E55B-444A-B5A9-E5756E96ADBB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CC98864-3C82-4530-B0AB-351F7A3CCA8F}
+	EndGlobalSection
+EndGlobal
