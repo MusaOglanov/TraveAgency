@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TraveAgency.Models
@@ -7,7 +8,9 @@ namespace TraveAgency.Models
     {
         public int Id { get; set; }
         public bool IsDomestic { get; set; }
+       
         public DateTime CheckInTime { get; set; }
+       
         public DateTime CheckOutTime { get; set; }
         public string Info { get; set; }
         public string Adress { get; set; }

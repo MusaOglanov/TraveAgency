@@ -1,7 +1,30 @@
 ﻿@model Hotel
 <div class="card-body">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Hotel  Create</h5>
+        <h5 class="mb-0">Hotel  Update</h5>
+    </div>
+    <div class="d-flex flex-wrap" id="myPhotos">
+        @if (Model.HotelImages.Count!=1)
+        {
+            @foreach (HotelImage hotelImage in Model.HotelImages)
+            {
+                <div class="d-flex flex-column m-2">
+                    <img style="width:100px;height:100px;" src="~/assets/img/@hotelImage.Image" />
+                    <a class="btn btn-danger del-images">Delete</a>
+                    <input type="hidden" value="@hotelImage.Id">
+                </div>
+            }
+        }
+        else
+        {
+            @foreach (HotelImage hotelImage in Model.HotelImages)
+            {
+                <div class="d-flex flex-column m-2">
+                    <img style="width:100px;height:100px;" src="~/assets/img/@hotelImage.Image" />
+                  
+                </div>
+            }
+        }
     </div>
     <form method="post" enctype="multipart/form-data">
 
@@ -40,10 +63,20 @@
 
         <div class="form-group">
             <label for="exampleFormControlSelect1">Categories</label>
-            <select  class="form-control" name="hotelCatsId[]">
+            <select class="form-control" name="hotelCatsId[]">
                 @foreach (HotelCategory hotelCategory in ViewBag.HotelCategory)
                 {
-                    <option value="@hotelCategory.Id">@hotelCategory.Name</option>
+                    if (Model.HotelHotelCategories.Any(c => c.HotelCategoryId == hotelCategory.Id))
+                    {
+                        <option selected value="@hotelCategory.Id">@hotelCategory.Name</option>
+
+                    }
+                    else
+                    {
+                        <option value="@hotelCategory.Id">@hotelCategory.Name</option>
+
+                    }
+
                 }
             </select>
         </div>
@@ -52,20 +85,35 @@
             <select multiple class="form-control" name="hoteRoomTypesId[]">
                 @foreach (HotelRoomType hotelRoomType in ViewBag.HotelRoomType)
                 {
-                    <option value="@hotelRoomType.Id">@hotelRoomType.Name günlük qiymət @hotelRoomType.Price</option>
+                    if (Model.HotelRoomTypes.Any(c => c.HotelId == hotelRoomType.Id))
+                    {
+                        <option selected value="@hotelRoomType.Id">@hotelRoomType.Name günlük qiymət @hotelRoomType.Price</option>
+
+                    }
+                    else
+                    {
+                        <option value="@hotelRoomType.Id">@hotelRoomType.Name günlük qiymət @hotelRoomType.Price</option>
+
+                    }
                 }
             </select>
         </div>
         <div class="form-group">
-            <label asp-for="HotelDetail.CheckInTime">Check in Time:</label>
-            <input asp-for="HotelDetail.CheckInTime" type="date" name="checkInTime">
-            <span class="text-danger" asp-validation-for="HotelDetail.CheckInTime"></span>
-        </div>
 
-        <div class="form-group">
-            <label asp-for="HotelDetail.CheckOutTime">Arrival Flight Date:</label>
-            <input asp-for="HotelDetail.CheckOutTime" type="date" name="checkOutTime">
-            <span class="text-danger" asp-validation-for="HotelDetail.CheckOutTime"></span>
+            <div class="form-group">
+                <label asp-for="HotelDetail.CheckInTime">Check in Time:</label>
+                <input asp-for="HotelDetail.CheckInTime" type="date" name="departureDate">
+                <span class="text-danger" asp-validation-for="HotelDetail.CheckInTime"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HotelDetail.CheckOutTime">Arrival Flight Date:</label>
+                <input asp-for="HotelDetail.CheckOutTime" type="date" name="arrivalDate">
+                <span class="text-danger" asp-validation-for="HotelDetail.CheckOutTime"></span>
+
+            </div>
+
         </div>
         <div class="mb-3">
             <label class="form-label" asp-for="HotelDetail.RoomAvailable">Room Available</label>
@@ -145,6 +193,25 @@
 
             }
         });
-        
+
+        $(document).on("click", ".del-images", function () {
+            let clickedBtn = $(this)
+            $(this).next().val()
+            $.ajax({
+                url: "/Hotels/DeleteImage/",
+                type: "get",
+                data: {
+                    "hotelImageId": clickedBtn.next().val()
+                },
+                success: function (res) {
+                    clickedBtn.parent().remove()
+                    if($(".del-images").length==1){
+                        $(".del-images").remove()
+                    }
+                }
+            });
+           
+        })
+
     </script>
 }
