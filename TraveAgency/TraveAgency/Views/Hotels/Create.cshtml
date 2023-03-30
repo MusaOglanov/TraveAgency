@@ -59,12 +59,14 @@
         <div class="form-group">
             <label asp-for="HotelDetail.CheckInTime">Check in Time:</label>
             <input asp-for="HotelDetail.CheckInTime" type="date" name="checkInTime">
+            <input asp-for="HotelDetail.CheckInTime" type="time" name="checkInTime">
             <span class="text-danger" asp-validation-for="HotelDetail.CheckInTime"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="HotelDetail.CheckOutTime">Arrival Flight Date:</label>
+            <label asp-for="HotelDetail.CheckOutTime">Check Out Time:</label>
             <input asp-for="HotelDetail.CheckOutTime" type="date" name="checkOutTime">
+            <input asp-for="HotelDetail.CheckOutTime" type="time" name="checkOutTime">
             <span class="text-danger" asp-validation-for="HotelDetail.CheckOutTime"></span>
         </div>
         <div class="mb-3">

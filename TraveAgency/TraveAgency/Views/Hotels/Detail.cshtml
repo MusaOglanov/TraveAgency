@@ -1,0 +1,109 @@
+﻿@model Hotel
+
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <h6>Name</h6>
+        <h4>@Model.Name</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6>Country</h6>
+        <h4>@Model.Country</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6> City </h6>
+        <h4>@Model.City</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Adress </h6>
+        <h4>@Model.HotelDetail.Adress</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Yerli/Xarici </h6>
+        @if (Model.HotelDetail.IsDomestic)
+        {
+            <h4>Xarici</h4>
+
+        }
+        else
+        {
+            <h4>Yerli</h4>
+
+        }
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Categories </h6>
+        @foreach (HotelCategory hotelCategory in ViewBag.HotelCategory)
+        {
+            <h4>@hotelCategory.Name</h4>
+
+        }
+    </div>
+    
+</div>
+
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <h6>Telephone</h6>
+        <h4>@Model.HotelDetail.PhoneNumber</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Email </h6>
+        <h4>@Model.HotelDetail.Email</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Website </h6>
+        <h4>@Model.HotelDetail.WebSite</h4>
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <h6>Room Avaiable</h6>
+        @if (Model.HotelDetail.RoomAvailable)
+        {
+            <h4>Otaq Mövcuddur</h4>
+
+        }
+        else
+        {
+            <h4>Hal Hazırda otaq mövcud deyil</h4>
+
+        }
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Room Type </h6>
+        @foreach (HotelRoomType hotelRoomType in ViewBag.HotelRoomType)
+        {
+            <h4>@hotelRoomType.Name <b>qiymət:</b>  @hotelRoomType.Price</h4>
+
+        }
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Price </h6>
+        <h4>@Model.Price</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Check In Time </h6>
+        <h5>@Model.HotelDetail.CheckInTime.ToString("dd/MMM/yyyy hh:mm tt")</h5>
+        <h6> Check Out Time </h6>
+        <h5>@Model.HotelDetail.CheckOutTime.ToString("dd/MMM/yyyy hh:mm tt")</h5>
+    </div>
+</div>
+<div class="form-row ">
+    <div class="form-group col-md-6" style="text-align:center">
+        <h4 class="mb-4 text-md  ">Info</h4>
+        <h5>@Model.HotelDetail.Info</h5>
+    </div>
+</div>
+
+<div class="d-flex flex-wrap" >
+    <h3 class="mb-4 text-md  ">Image</h3>
+    @foreach (HotelImage hotelImage in Model.HotelImages)
+    {
+        <div class="d-flex flex-column m-2">
+            <img style="width:150px;height:150px;" src="~/assets/img/@hotelImage.Image" />
+        </div>
+    }
+</div>
+
+<a asp-action="Index" class="btn btn-dark text-white">Go Back</a>
+

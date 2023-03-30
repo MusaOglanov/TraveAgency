@@ -271,6 +271,28 @@ namespace TraveAgency.Controllers
         }
         #endregion
 
+        #region Detail
+
+        public async Task<IActionResult> Detail(int? id)
+        {
+            if (id == null)
+            {
+                NotFound();
+            }
+            Hotel dbHotel = await _db.Hotels
+              .Include(h => h.HotelDetail)
+              .Include(h => h.HotelImages)
+              .Include(h => h.HotelRoomTypes)
+              .Include(h => h.HotelHotelCategories)
+              .ThenInclude(h => h.HotelCategory)
+              .FirstOrDefaultAsync(x => x.Id == id);
+            ViewBag.HotelRoomType = await _db.HotelRoomTypes.ToListAsync();
+            ViewBag.HotelCategory = await _db.HotelCategories.ToListAsync();
+
+            return View(dbHotel);
+        }
+
+        #endregion
 
 
         #endregion
@@ -289,5 +311,32 @@ namespace TraveAgency.Controllers
         #endregion
 
 
+        #region Activity
+        public async Task<IActionResult> Activity(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Hotel dbHotel = await _db.Hotels.FirstOrDefaultAsync(t => t.Id == id);
+
+            if (dbHotel == null)
+            {
+                return BadRequest();
+            }
+
+            if (dbHotel.IsDeactive)
+            {
+                dbHotel.IsDeactive = false;
+            }
+            else
+            {
+                dbHotel.IsDeactive = true;
+            }
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        #endregion
     }
 }

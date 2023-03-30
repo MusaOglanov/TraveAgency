@@ -8,9 +8,7 @@ namespace TraveAgency.Models
     {
         public int Id { get; set; }
         public bool IsDomestic { get; set; }
-       
         public DateTime CheckInTime { get; set; }
-       
         public DateTime CheckOutTime { get; set; }
         public string Info { get; set; }
         public string Adress { get; set; }
