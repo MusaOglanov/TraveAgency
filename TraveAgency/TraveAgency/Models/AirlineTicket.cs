@@ -24,7 +24,8 @@ namespace TraveAgency.Models
         public TimeSpan FlightDuration { get; set; }
         public int TicketPrice { get; set; }
         public AirlineTicketDetail AirlineTicketDetail { get; set; }
-        public ICollection<SeatClass> SeatClasses { get; set; }
+        public SeatClass SeatClass { get; set; }
+        public int SeatClassId { get; set; }
 
 
     }

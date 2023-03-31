@@ -162,3 +162,7 @@ C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razo
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Airports\Index.cshtml.g.cs
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Airports\Create.cshtml.g.cs
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Airports\Update.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\SeatClasses\Index.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\SeatClasses\Create.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\SeatClasses\Update.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\SeatClasses\Detail.cshtml.g.cs

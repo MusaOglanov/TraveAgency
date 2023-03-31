@@ -11,8 +11,7 @@ namespace TraveAgency.Models
         [MaxLength(500)]
         public string Info { get; set; }
         public bool IsDeactive { get; set; }
-        public AirlineTicket AirlineTicket { get; set; }
-        public int AirlineTicketId { get; set; }
+        public ICollection<AirlineTicket> AirlineTicket { get; set; }
 
     }
 }

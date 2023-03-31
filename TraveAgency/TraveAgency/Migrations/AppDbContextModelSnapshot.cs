@@ -57,6 +57,9 @@ namespace TraveAgency.Migrations
                     b.Property<int>("ReturnAirportId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SeatClassId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TicketPrice")
                         .HasColumnType("int");
 
@@ -74,6 +77,8 @@ namespace TraveAgency.Migrations
                     b.HasIndex("DepartureAirportId");
 
                     b.HasIndex("ReturnAirportId");
+
+                    b.HasIndex("SeatClassId");
 
                     b.HasIndex("TransferAirportId");
 
@@ -345,9 +350,6 @@ namespace TraveAgency.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AirlineTicketId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Info")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -362,8 +364,6 @@ namespace TraveAgency.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AirlineTicketId");
 
                     b.ToTable("SeatClasses");
                 });
@@ -396,6 +396,12 @@ namespace TraveAgency.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("TraveAgency.Models.SeatClass", "SeatClass")
+                        .WithMany("AirlineTicket")
+                        .HasForeignKey("SeatClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TraveAgency.Models.Airport", "TransferAirport")
                         .WithMany()
                         .HasForeignKey("TransferAirportId")
@@ -409,6 +415,8 @@ namespace TraveAgency.Migrations
                     b.Navigation("DepartureAirport");
 
                     b.Navigation("ReturnAirport");
+
+                    b.Navigation("SeatClass");
 
                     b.Navigation("TransferAirport");
                 });
@@ -465,22 +473,6 @@ namespace TraveAgency.Migrations
                     b.Navigation("Hotel");
                 });
 
-            modelBuilder.Entity("TraveAgency.Models.SeatClass", b =>
-                {
-                    b.HasOne("TraveAgency.Models.AirlineTicket", "AirlineTicket")
-                        .WithMany("SeatClasses")
-                        .HasForeignKey("AirlineTicketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AirlineTicket");
-                });
-
-            modelBuilder.Entity("TraveAgency.Models.AirlineTicket", b =>
-                {
-                    b.Navigation("SeatClasses");
-                });
-
             modelBuilder.Entity("TraveAgency.Models.Airport", b =>
                 {
                     b.Navigation("AirlineTickets");
@@ -500,6 +492,11 @@ namespace TraveAgency.Migrations
             modelBuilder.Entity("TraveAgency.Models.HotelCategory", b =>
                 {
                     b.Navigation("HotelHotelCategories");
+                });
+
+            modelBuilder.Entity("TraveAgency.Models.SeatClass", b =>
+                {
+                    b.Navigation("AirlineTicket");
                 });
 #pragma warning restore 612, 618
         }

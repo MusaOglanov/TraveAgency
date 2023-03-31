@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TraveAgency.Migrations
 {
-    public partial class CreateAirlineTicketsAndAirportsAndSeatClassesTables : Migration
+    public partial class CreateAirlineTicketsAndAirportsAndSeatClassTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,7 @@ namespace TraveAgency.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsTransfer = table.Column<bool>(type: "bit", nullable: false),
                     TransferTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    FlightDuration = table.Column<TimeSpan>(type: "time", nullable: true),
+                    FlightDuration = table.Column<TimeSpan>(type: "time", nullable: false),
                     TransferPrice = table.Column<int>(type: "int", nullable: true),
                     IsReturn = table.Column<bool>(type: "bit", nullable: false),
                     ReturnTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -53,6 +53,22 @@ namespace TraveAgency.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SeatClasses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SeatPrice = table.Column<int>(type: "int", nullable: true),
+                    Info = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    IsDeactive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SeatClasses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AirlineTickets",
                 columns: table => new
                 {
@@ -66,10 +82,10 @@ namespace TraveAgency.Migrations
                     ReturnAirportId = table.Column<int>(type: "int", nullable: true),
                     DepartureDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ArrivalDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FlightDuration = table.Column<TimeSpan>(type: "time", nullable: false),
-                    TicketPrice = table.Column<int>(type: "int", nullable: false),
+                    FlightDuration = table.Column<TimeSpan>(type: "time", nullable: true),
+                    TicketPrice = table.Column<int>(type: "int", nullable: true),
                     AirlineTicketDetailId = table.Column<int>(type: "int", nullable: true),
-                    AirportId = table.Column<int>(type: "int", nullable: true)
+                    SeatClassId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -80,12 +96,7 @@ namespace TraveAgency.Migrations
                         principalTable: "AirlineTicketDetails",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AirlineTickets_Airports_AirportId",
-                        column: x => x.AirportId,
-                        principalTable: "Airports",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                   
                     table.ForeignKey(
                         name: "FK_AirlineTickets_Airports_ArrivalAirportId",
                         column: x => x.ArrivalAirportId,
@@ -110,27 +121,10 @@ namespace TraveAgency.Migrations
                         principalTable: "Airports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SeatClasses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SeatPrice = table.Column<int>(type: "int", nullable: true),
-                    Info = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    IsDeactive = table.Column<bool>(type: "bit", nullable: false),
-                    AirlineTicketId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SeatClasses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SeatClasses_AirlineTickets_AirlineTicketId",
-                        column: x => x.AirlineTicketId,
-                        principalTable: "AirlineTickets",
+                        name: "FK_AirlineTickets_SeatClasses_SeatClassId",
+                        column: x => x.SeatClassId,
+                        principalTable: "SeatClasses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -139,11 +133,6 @@ namespace TraveAgency.Migrations
                 name: "IX_AirlineTickets_AirlineTicketDetailId",
                 table: "AirlineTickets",
                 column: "AirlineTicketDetailId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AirlineTickets_AirportId",
-                table: "AirlineTickets",
-                column: "AirportId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AirlineTickets_ArrivalAirportId",
@@ -161,21 +150,18 @@ namespace TraveAgency.Migrations
                 column: "ReturnAirportId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AirlineTickets_SeatClassId",
+                table: "AirlineTickets",
+                column: "SeatClassId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AirlineTickets_TransferAirportId",
                 table: "AirlineTickets",
                 column: "TransferAirportId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SeatClasses_AirlineTicketId",
-                table: "SeatClasses",
-                column: "AirlineTicketId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "SeatClasses");
-
             migrationBuilder.DropTable(
                 name: "AirlineTickets");
 
@@ -184,6 +170,9 @@ namespace TraveAgency.Migrations
 
             migrationBuilder.DropTable(
                 name: "Airports");
+
+            migrationBuilder.DropTable(
+                name: "SeatClasses");
         }
     }
 }
