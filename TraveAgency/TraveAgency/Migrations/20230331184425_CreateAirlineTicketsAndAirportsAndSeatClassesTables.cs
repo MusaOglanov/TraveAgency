@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TraveAgency.Migrations
 {
-    public partial class CreateAirlineTicketsAndAirportsAndSeatClassTable : Migration
+    public partial class CreateAirlineTicketsAndAirportsAndSeatClassesTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,7 +58,7 @@ namespace TraveAgency.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SeatPrice = table.Column<int>(type: "int", nullable: true),
                     Info = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     IsDeactive = table.Column<bool>(type: "bit", nullable: false)
@@ -75,17 +75,18 @@ namespace TraveAgency.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AirlineCompany = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FlightNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FlightNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DepartureAirportId = table.Column<int>(type: "int", nullable: false),
                     ArrivalAirportId = table.Column<int>(type: "int", nullable: false),
                     TransferAirportId = table.Column<int>(type: "int", nullable: true),
                     ReturnAirportId = table.Column<int>(type: "int", nullable: true),
                     DepartureDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ArrivalDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FlightDuration = table.Column<TimeSpan>(type: "time", nullable: true),
-                    TicketPrice = table.Column<int>(type: "int", nullable: true),
+                    FlightDuration = table.Column<TimeSpan>(type: "time", nullable: false),
+                    TicketPrice = table.Column<int>(type: "int", nullable: false),
                     AirlineTicketDetailId = table.Column<int>(type: "int", nullable: true),
                     SeatClassId = table.Column<int>(type: "int", nullable: false),
+                    IsDeactive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,7 +97,6 @@ namespace TraveAgency.Migrations
                         principalTable: "AirlineTicketDetails",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                   
                     table.ForeignKey(
                         name: "FK_AirlineTickets_Airports_ArrivalAirportId",
                         column: x => x.ArrivalAirportId,

@@ -13,6 +13,7 @@ namespace TraveAgency.Models
         [MaxLength(3)]
         public string Code { get; set; }
         public bool IsDeactive { get; set; }
+        [NotMapped]
         public List<AirlineTicket> AirlineTickets { get; set; }
     }
 }

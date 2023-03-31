@@ -26,6 +26,7 @@ namespace TraveAgency.Models
         public AirlineTicketDetail AirlineTicketDetail { get; set; }
         public SeatClass SeatClass { get; set; }
         public int SeatClassId { get; set; }
+        public bool IsDeactive { get; set; }
 
 
     }

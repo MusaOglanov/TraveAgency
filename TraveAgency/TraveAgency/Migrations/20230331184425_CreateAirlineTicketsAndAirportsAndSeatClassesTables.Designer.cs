@@ -10,8 +10,8 @@ using TraveAgency.DAL;
 namespace TraveAgency.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230331145023_CreateAirlineTicketsAndAirportsAndSeatClassTable")]
-    partial class CreateAirlineTicketsAndAirportsAndSeatClassTable
+    [Migration("20230331184425_CreateAirlineTicketsAndAirportsAndSeatClassesTables")]
+    partial class CreateAirlineTicketsAndAirportsAndSeatClassesTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,9 +35,6 @@ namespace TraveAgency.Migrations
                     b.Property<int?>("AirlineTicketDetailId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AirportId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ArrivalAirportId")
                         .HasColumnType("int");
 
@@ -56,6 +53,9 @@ namespace TraveAgency.Migrations
                     b.Property<string>("FlightNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeactive")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ReturnAirportId")
                         .HasColumnType("int");
 
@@ -71,8 +71,6 @@ namespace TraveAgency.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AirlineTicketDetailId");
-
-                    b.HasIndex("AirportId");
 
                     b.HasIndex("ArrivalAirportId");
 
@@ -376,10 +374,6 @@ namespace TraveAgency.Migrations
                         .WithMany()
                         .HasForeignKey("AirlineTicketDetailId");
 
-                    b.HasOne("TraveAgency.Models.Airport", null)
-                        .WithMany("AirlineTickets")
-                        .HasForeignKey("AirportId");
-
                     b.HasOne("TraveAgency.Models.Airport", "ArrivalAirport")
                         .WithMany()
                         .HasForeignKey("ArrivalAirportId")
@@ -473,11 +467,6 @@ namespace TraveAgency.Migrations
                         .IsRequired();
 
                     b.Navigation("Hotel");
-                });
-
-            modelBuilder.Entity("TraveAgency.Models.Airport", b =>
-                {
-                    b.Navigation("AirlineTickets");
                 });
 
             modelBuilder.Entity("TraveAgency.Models.Hotel", b =>
