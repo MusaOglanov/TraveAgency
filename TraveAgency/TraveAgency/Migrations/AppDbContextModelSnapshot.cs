@@ -54,7 +54,7 @@ namespace TraveAgency.Migrations
                     b.Property<bool>("IsDeactive")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ReturnAirportId")
+                    b.Property<int?>("ReturnAirportId")
                         .HasColumnType("int");
 
                     b.Property<int>("SeatClassId")
@@ -63,7 +63,7 @@ namespace TraveAgency.Migrations
                     b.Property<int>("TicketPrice")
                         .HasColumnType("int");
 
-                    b.Property<int>("TransferAirportId")
+                    b.Property<int?>("TransferAirportId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -93,14 +93,11 @@ namespace TraveAgency.Migrations
                     b.Property<string>("BaggageAllowance")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("BaggagePrice")
+                    b.Property<int?>("BaggagePrice")
                         .HasColumnType("int");
 
                     b.Property<string>("FlightDescription")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeSpan>("FlightDuration")
-                        .HasColumnType("time");
 
                     b.Property<string>("Handluggage")
                         .HasColumnType("nvarchar(max)");
@@ -109,9 +106,6 @@ namespace TraveAgency.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("HassMealService")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeactive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsReturn")
@@ -123,19 +117,19 @@ namespace TraveAgency.Migrations
                     b.Property<string>("MealDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MealPrice")
+                    b.Property<int?>("MealPrice")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReturnPrice")
+                    b.Property<int?>("ReturnPrice")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ReturnTime")
+                    b.Property<DateTime?>("ReturnTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TransferPrice")
+                    b.Property<int?>("TransferPrice")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("TransferTime")
+                    b.Property<DateTime?>("TransferTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -387,8 +381,7 @@ namespace TraveAgency.Migrations
                     b.HasOne("TraveAgency.Models.Airport", "ReturnAirport")
                         .WithMany()
                         .HasForeignKey("ReturnAirportId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("TraveAgency.Models.SeatClass", "SeatClass")
                         .WithMany("AirlineTicket")
@@ -399,8 +392,7 @@ namespace TraveAgency.Migrations
                     b.HasOne("TraveAgency.Models.Airport", "TransferAirport")
                         .WithMany()
                         .HasForeignKey("TransferAirportId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("AirlineTicketDetail");
 

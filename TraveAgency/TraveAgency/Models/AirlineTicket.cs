@@ -15,9 +15,9 @@ namespace TraveAgency.Models
         public Airport DepartureAirport { get; set; }
         public int ArrivalAirportId { get; set; }
         public Airport ArrivalAirport { get; set; }
-        public int TransferAirportId { get; set; }
+        public int? TransferAirportId { get; set; }
         public Airport TransferAirport { get; set; }
-        public int ReturnAirportId { get; set; }
+        public int? ReturnAirportId { get; set; }
         public Airport ReturnAirport { get; set; }
         public DateTime DepartureDateTime { get; set; }
         public DateTime ArrivalDateTime { get; set; }

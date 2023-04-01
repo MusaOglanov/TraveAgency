@@ -167,3 +167,4 @@ C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razo
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\SeatClasses\Update.cshtml.g.cs
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\SeatClasses\Detail.cshtml.g.cs
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\AirlineTickets\Index.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\AirlineTickets\Create.cshtml.g.cs

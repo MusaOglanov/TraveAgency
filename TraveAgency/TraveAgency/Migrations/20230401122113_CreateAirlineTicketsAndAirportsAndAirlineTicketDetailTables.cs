@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TraveAgency.Migrations
 {
-    public partial class CreateAirlineTicketsAndAirportsAndSeatClassesTables : Migration
+    public partial class CreateAirlineTicketsAndAirportsAndAirlineTicketDetailTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,6 @@ namespace TraveAgency.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsTransfer = table.Column<bool>(type: "bit", nullable: false),
                     TransferTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    FlightDuration = table.Column<TimeSpan>(type: "time", nullable: false),
                     TransferPrice = table.Column<int>(type: "int", nullable: true),
                     IsReturn = table.Column<bool>(type: "bit", nullable: false),
                     ReturnTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -27,8 +26,7 @@ namespace TraveAgency.Migrations
                     FlightDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HassMealService = table.Column<bool>(type: "bit", nullable: false),
                     MealDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MealPrice = table.Column<int>(type: "int", nullable: true),
-                    IsDeactive = table.Column<bool>(type: "bit", nullable: false)
+                    MealPrice = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,10 +39,10 @@ namespace TraveAgency.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
                     IsDeactive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -59,7 +57,7 @@ namespace TraveAgency.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SeatPrice = table.Column<int>(type: "int", nullable: true),
+                    SeatPrice = table.Column<int>(type: "int", nullable: false),
                     Info = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     IsDeactive = table.Column<bool>(type: "bit", nullable: false)
                 },

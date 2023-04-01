@@ -26,6 +26,7 @@ namespace TraveAgency.DAL
             modelBuilder.Entity<Hotel>()
                 .Property(h => h.Country)
                 .HasDefaultValue("Azərbaycan");
+            
 
             modelBuilder.Entity<AirlineTicket>()
               .HasOne(t => t.DepartureAirport)
