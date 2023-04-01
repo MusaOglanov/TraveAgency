@@ -1,0 +1,338 @@
+﻿@model AirlineTicket
+
+<div class="card-body">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Airline Ticket  Update</h5>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label class="form-label" asp-for="AirlineCompany"></label>
+            <input asp-for="AirlineCompany" class="form-control">
+            <span class="text-danger" asp-validation-for="AirlineCompany"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="FlightNumber">  </label>
+            <input asp-for="FlightNumber" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="FlightNumber"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="DepartureAirport"></label>
+            <select class="form-control" name="depAirId">
+                @foreach (Airport depAirport in ViewBag.DepartureAirport)
+                {
+                    if (Model.DepartureAirportId== depAirport.Id)
+                    {
+                        <option selected value="@depAirport.Id">@depAirport.Name  @depAirport.Code</option>
+
+                    }
+                    else
+                    {
+                        <option value="@depAirport.Id">@depAirport.Name  @depAirport.Code</option>
+
+                    }
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="DepartureAirport"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="ArrivalAirport"></label>
+            <select class="form-control" name="arrAirId">
+                @foreach (Airport arrAirport in ViewBag.ArrivalAirport)
+                {
+                    if (Model.ArrivalAirportId == arrAirport.Id)
+                    {
+                        <option selected value="@arrAirport.Id">@arrAirport.Name  @arrAirport.Code</option>
+                    }
+                    else
+                    {
+                        <option  value="@arrAirport.Id">@arrAirport.Name  @arrAirport.Code</option>
+
+                    }
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="ArrivalAirport"></span>
+        </div>
+
+
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="AirlineTicketDetail.IsReturn">  </label>
+            <input asp-for="AirlineTicketDetail.IsReturn">
+            <span class="text-danger" asp-validation-for="AirlineTicketDetail.IsReturn"></span>
+        </div>
+
+
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="AirlineTicketDetail.IsTransfer">  </label>
+            <input asp-for="AirlineTicketDetail.IsTransfer">
+            <span class="text-danger" asp-validation-for="AirlineTicketDetail.IsTransfer"></span>
+        </div>
+
+
+        <div class="mb-3 d-none" id="ReAirport">
+            <div class="mb-3   ">
+                <label class="form-label" asp-for="ReturnAirport"></label>
+                <select class="form-control " name="reAirId">
+                    @foreach (Airport returnAirport in ViewBag.ReturnAirport)
+                    {
+                        if (Model.ReturnAirportId == returnAirport.Id)
+                        {
+                            <option selected value="@returnAirport.Id">@returnAirport.Name  @returnAirport.Code</option>
+                        }
+                        else
+                        {
+                            <option  value="@returnAirport.Id">@returnAirport.Name  @returnAirport.Code</option>
+
+                        }
+                    }
+                </select>
+                <span class="text-danger" asp-validation-for="ReturnAirport"></span>
+            </div>
+            <div class="col-2  ">
+                <label class="form-label" asp-for="AirlineTicketDetail.ReturnPrice"></label>
+                <input asp-for="AirlineTicketDetail.ReturnPrice" type="text" name="returnPriceId" class="form-control">
+                <span class="text-danger" asp-validation-for="AirlineTicketDetail.ReturnPrice"></span>
+            </div>
+
+        </div>
+
+
+
+        <div class="mb-3 d-none" id="TransAiport">
+
+            <div class="mb-3   ">
+
+                <label class="form-label" asp-for="TransferAirport"></label>
+                <select class="form-control " name="transAirId">
+                    @foreach (Airport transferAirport in ViewBag.TransferAirport)
+                    {
+                        if (Model.TransferAirportId == transferAirport.Id)
+                        {
+                            <option selected value="@transferAirport.Id">@transferAirport.Name  @transferAirport.Code</option>
+                        }
+                        else
+                        {
+                            <option  value="@transferAirport.Id">@transferAirport.Name  @transferAirport.Code</option>
+
+                        }
+                    }
+                </select>
+                <span class="text-danger" asp-validation-for="TransferAirport"></span>
+
+
+            </div>
+            <div class="col-2  ">
+                <label class="form-label" asp-for="AirlineTicketDetail.TransferPrice"></label>
+                <input asp-for="AirlineTicketDetail.TransferPrice" type="text" name="transferPriceId" class="form-control">
+                <span class="text-danger" asp-validation-for="AirlineTicketDetail.TransferPrice"></span>
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Seat Class</label>
+            <select class="form-control" name="seatClassId">
+                @foreach (SeatClass seatClass in ViewBag.SeatClass)
+                {
+                    <option value="@seatClass.Id">@seatClass.Name</option>
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="SeatClass"></span>
+        </div>
+
+        <div class="form-group">
+
+            <div class="form-group">
+                <div>
+                    <label asp-for="DepartureDateTime">Departure- Flight Date:</label>
+                    <input asp-for="DepartureDateTime" type="date" name="departureDate">
+                    <span class="text-danger" asp-validation-for="DepartureDateTime"></span>
+                    <input asp-for="DepartureDateTime" type="time" name="departureTime">
+                    <span class="text-danger" asp-validation-for="DepartureDateTime"></span>
+
+                    <label asp-for="ArrivalDateTime">Arrival Flight Date:</label>
+                    <input asp-for="ArrivalDateTime" type="date" name="arrivalDate">
+                    <span class="text-danger" asp-validation-for="ArrivalDateTime"></span>
+                    <input asp-for="ArrivalDateTime" type="time" name="arrivalTime">
+                    <span class="text-danger" asp-validation-for="ArrivalDateTime"></span>
+
+
+
+
+
+                    <div>
+                        <label asp-for="FlightDuration">Flight Duration Time:</label>
+                        <input asp-for="FlightDuration" type="text" pattern="[0-9]{1,2}:[0-9]{1,2}" placeholder="hh:mm" />
+                        <span class="text-danger" asp-validation-for="FlightDuration"></span>
+                    </div>
+                    <div class="form-group">
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-none" id="returnTime">
+                <label asp-for="AirlineTicketDetail.ReturnTime">Return- Flight Date:</label>
+                <input asp-for="AirlineTicketDetail.ReturnTime" type="date" name="returnDate">
+                <span class="text-danger" asp-validation-for="DepartureDateTime"></span>
+                <input asp-for="AirlineTicketDetail.ReturnTime" type="time" name="returnTime">
+                <span class="text-danger" asp-validation-for="AirlineTicketDetail.ReturnTime"></span>
+
+            </div>
+        </div>
+
+        <div class="d-none" id="TransTime">
+            <label asp-for="AirlineTicketDetail.TransferTime">Transfer- Flight Date:</label>
+            <input asp-for="AirlineTicketDetail.TransferTime" type="date" name="transferDate">
+            <span class="text-danger" asp-validation-for="DepartureDateTime"></span>
+            <input asp-for="AirlineTicketDetail.TransferTime" type="time" name="transferTime">
+            <span class="text-danger" asp-validation-for="AirlineTicketDetail.TransferTime"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="TicketPrice"></label>
+            <input asp-for="TicketPrice" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="TicketPrice"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="AirlineTicketDetail.Handluggage"></label>
+            <input asp-for="AirlineTicketDetail.Handluggage" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="AirlineTicketDetail.Handluggage"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="AirlineTicketDetail.HassBaggage" class="form-label"></label>
+            <input asp-for="AirlineTicketDetail.HassBaggage">
+            <span class="text-danger" asp-validation-for="AirlineTicketDetail.HassBaggage"></span>
+        </div>
+        <div class="mb-3 d-none" id="BaggageId">
+            <div class="mb-3">
+                <label class="form-label" asp-for="AirlineTicketDetail.BaggageAllowance"></label>
+                <input asp-for="AirlineTicketDetail.BaggageAllowance" type="text" class="form-control">
+                <span class="text-danger" asp-validation-for="AirlineTicketDetail.BaggageAllowance"></span>
+            </div>
+            <div class="mb-3 col-2">
+                <label class="form-label" asp-for="AirlineTicketDetail.BaggagePrice"></label>
+                <input asp-for="AirlineTicketDetail.BaggagePrice" type="text" name="baggageId" class="form-control">
+                <span class="text-danger" asp-validation-for="AirlineTicketDetail.BaggagePrice"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="AirlineTicketDetail.FlightDescription"></label>
+            <textarea asp-for="AirlineTicketDetail.FlightDescription" type="text" class="form-control"></textarea>
+            <span class="text-danger" asp-validation-for="AirlineTicketDetail.FlightDescription"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="AirlineTicketDetail.HassMealService" class="form-label"></label>
+            <input asp-for="AirlineTicketDetail.HassMealService">
+            <span class="text-danger" asp-validation-for="AirlineTicketDetail.HassMealService"></span>
+        </div>
+        <div class="mb-3 d-none" id="MealDesc">
+            <div class="mb-3">
+                <label asp-for="AirlineTicketDetail.MealDescription" class="form-label"></label>
+                <textarea asp-for="AirlineTicketDetail.MealDescription" type="text" class="form-control"></textarea>
+                <span class="text-danger" asp-validation-for="AirlineTicketDetail.MealDescription"></span>
+            </div>
+            <div class="form-group col-2">
+                <label asp-for="AirlineTicketDetail.MealPrice" class="form-label"></label>
+                <input asp-for="AirlineTicketDetail.MealPrice" type="text" class="form-control">
+                <span class="text-danger" asp-validation-for="AirlineTicketDetail.MealPrice"></span>
+            </div>
+        </div>
+
+
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-action="index" class="btn btn-secondary text-white">Go Back</a>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        if ($('#AirlineTicketDetail_IsReturn').prop('checked')) {
+            $('#ReAirport').removeClass("d-none")
+            $('#returnTime').removeClass("d-none")
+        }
+        else {
+            $('#ReAirport').addClass("d-none")
+            $('#returnTime').addClass("d-none")
+            $('#AirlineTicketDetail_IsReturn').removeClass("d-none")
+
+        }
+        $(document).on("change", "#AirlineTicketDetail_IsReturn", function () {
+            if ($('#AirlineTicketDetail_IsReturn').prop('checked')) {
+                $('#ReAirport').removeClass("d-none")
+                $('#returnTime').removeClass("d-none")
+            }
+            else {
+                $('#ReAirport').addClass("d-none")
+                $('#returnTime').addClass("d-none")
+
+            }
+        });
+
+        if ($('#AirlineTicketDetail_IsTransfer').prop('checked')) {
+            $('#TransAiport').removeClass("d-none")
+            $('#TransTime').removeClass("d-none")
+        }
+        else {
+            $('#TransAiport').addClass("d-none")
+            $('#TransferTime').addClass("d-none")
+            $('#AirlineTicketDetail_IsTransfer').removeClass("d-none")
+
+        }
+        $(document).on("change", "#AirlineTicketDetail_IsTransfer", function () {
+            if ($('#AirlineTicketDetail_IsTransfer').prop('checked')) {
+                $('#TransAiport').removeClass("d-none")
+                $('#TransTime').removeClass("d-none")
+            }
+            else {
+                $('#TransAiport').addClass("d-none")
+                $('#TransTime').addClass("d-none")
+
+            }
+        });
+        if ($('#AirlineTicketDetail_HassMealService').prop('checked')) {
+            $('#MealDesc').removeClass("d-none")
+        }
+        else {
+            $('#MealDesc').addClass("d-none")
+            $('#AirlineTicketDetail_HassMealService').removeClass("d-none")
+
+        }
+        $(document).on("change", "#AirlineTicketDetail_HassMealService", function () {
+            if ($('#AirlineTicketDetail_HassMealService').prop('checked')) {
+                $('#MealDesc').removeClass("d-none")
+            }
+            else {
+                $('#MealDesc').addClass("d-none")
+
+            }
+        });
+        if ($('#AirlineTicketDetail_HassBaggage').prop('checked')) {
+            $('#BaggageId').removeClass("d-none")
+        }
+        else {
+            $('#BaggageId').addClass("d-none")
+            $('#AirlineTicketDetail_HassBaggage').removeClass("d-none")
+
+        }
+        $(document).on("change", "#AirlineTicketDetail_HassBaggage", function () {
+            if ($('#AirlineTicketDetail_HassBaggage').prop('checked')) {
+                $('#BaggageId').removeClass("d-none")
+            }
+            else {
+                $('#BaggageId').addClass("d-none")
+
+            }
+        });
+    </script>
+}
