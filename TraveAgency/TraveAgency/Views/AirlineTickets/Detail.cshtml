@@ -1,0 +1,105 @@
+﻿@model AirlineTicket
+
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <h6>Airline Company</h6>
+        <h4>@Model.AirlineCompany</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6>Airline Company</h6>
+        <h4>@Model.SeatClass.Name qiymət: @Model.SeatClass.SeatPrice</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6>Flight Duration</h6>
+        <h5>@Model.FlightDuration.ToString("hh'saat 'mm'dəq'")</h5>
+    </div>
+
+
+</div>
+<div class="form-row ">
+
+    <div class="form-group col-md-6">
+        <h6>Deoarture Airport</h6>
+        <h4>@Model.DepartureAirport.Name /@Model.DepartureAirport.Country/@Model.DepartureAirport.City </h4>
+
+
+    </div>
+    <div class="form-group col-md-6">
+        <h6> Departure Date Time </h6>
+        <h5>@Model.DepartureDateTime.ToString("dd/MMM/yyyy hh:mm tt")</h5>
+    </div>
+</div>
+<div class="form-row">
+
+    <div class="form-group col-md-6">
+        <h6> Arrival Airport </h6>
+        <h4>@Model.ArrivalAirport.Name/@Model.ArrivalAirport.Country/@Model.ArrivalAirport.City </h4>
+    </div>
+    <div class="form-group col-md-6">
+        <h6> Arrival Date Time </h6>
+        <h5>@Model.ArrivalDateTime.ToString("dd/MMM/yyyy hh:mm tt")</h5>
+    </div>
+</div>
+<div class="form-row">
+
+    @if (Model.AirlineTicketDetail.IsReturn)
+    {
+        <div class="form-group col-md-6">
+            <h6> Return Airport </h6>
+            <h4>@Model.ReturnAirport.Name/@Model.ReturnAirport.Country/@Model.ReturnAirport.City/qiymet: @Model.AirlineTicketDetail.ReturnPrice AZN</h4>
+        </div>
+        <div class="form-group col-md-6">
+            <h6> Return Date Time </h6>
+            <h5>@Model.AirlineTicketDetail.ReturnTime?.ToString("dd/MMM/yyyy hh:mm tt")</h5>
+        </div>
+    }
+</div>
+<div class="form-row">
+    @if (Model.AirlineTicketDetail.IsTransfer)
+    {
+        <div class="form-group col-md-6">
+            <h6> Transfer Airport </h6>
+            <h4>
+                @Model.TransferAirport.Name/ @Model.TransferAirport.Country/ @Model.TransferAirport.City
+                /qiymet: @Model.AirlineTicketDetail.TransferPrice AZN
+            </h4>
+        </div>
+        <div class="form-group col-md-6">
+            <h6> Transfer Date Time </h6>
+            <h5>@Model.AirlineTicketDetail.TransferTime?.ToString("dd/MMM/yyyy hh:mm tt")</h5>
+        </div>
+    }
+
+</div>
+<div class="form-row col-md-12">
+    <div class="form-group col-md-3" style="text-align:center">
+        <h6 class="mb-4 text-md  ">Hand Luggage</h6>
+        <h5>@Model.AirlineTicketDetail.Handluggage</h5>
+    </div>
+    @if (Model.AirlineTicketDetail.HassBaggage)
+    {
+        <div class="form-group col-md-3" style="text-align:center">
+            <h6 class="mb-4 text-md  ">Baggage Allowance</h6>
+            <h5>@Model.AirlineTicketDetail.BaggageAllowance</h5>
+            <h5>qiymeti: @Model.AirlineTicketDetail.BaggagePrice</h5>
+        </div>
+    }
+    @if (Model.AirlineTicketDetail.HassMealService)
+    {
+        <div class="form-group col-md-3" style="text-align:center">
+            <h6 class="mb-4 text-md  ">Meal Service</h6>
+            <h5>@Model.AirlineTicketDetail.MealDescription</h5>
+            <h5>qiymeti: @Model.AirlineTicketDetail.MealPrice</h5>
+        </div>
+    }
+    <div class="form-row col-md-3">
+        <div class="form-group col-md-3" style="text-align:center">
+            <h6 class="mb-4 text-md  ">Flight Description</h6>
+            <h5>@Model.AirlineTicketDetail.FlightDescription</h5>
+        </div>
+    </div>
+</div>
+
+
+<a asp-action="Index" class="btn btn-dark text-white">Go Back</a>
+

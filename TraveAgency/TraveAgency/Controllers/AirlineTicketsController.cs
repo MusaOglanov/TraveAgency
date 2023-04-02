@@ -69,7 +69,6 @@ namespace TraveAgency.Controllers
                 ModelState.AddModelError("ArrivalAirport", "Gediş və Eniş Aeroportları eyni ola bilməz");
                 return View();
             }
-            int totalPrice = 1;
 
             if (ticket.AirlineTicketDetail.IsTransfer)
             {
@@ -88,7 +87,6 @@ namespace TraveAgency.Controllers
                 DateTime trasferDateTime = DateTime.Parse(transferDateTimeStr);
                 ticket.AirlineTicketDetail.TransferTime = trasferDateTime;
                 ticket.AirlineTicketDetail.TransferPrice = transferPriceId;
-                 totalPrice+= transferPriceId;
                 ticket.TransferAirportId = transAirId;
 
             }
@@ -139,7 +137,6 @@ namespace TraveAgency.Controllers
             TimeSpan flightDurationTime = TimeSpan.Parse(flightDuration);
             ticket.FlightDuration = flightDurationTime;
 
-             ticket.TicketPrice+=totalPrice  ;
 
             ticket.DepartureAirportId = depAirId;
             ticket.ArrivalAirportId = arrAirId;
@@ -294,7 +291,6 @@ namespace TraveAgency.Controllers
             TimeSpan flightDurationTime = TimeSpan.Parse(flightDuration);
             dbTicket.FlightDuration = flightDurationTime;
 
-            ticket.TicketPrice += ticket.AirlineTicketDetail.ReturnPrice.Value;
 
             dbTicket.DepartureAirportId = depAirId;
             dbTicket.ArrivalAirportId = arrAirId;
@@ -303,9 +299,11 @@ namespace TraveAgency.Controllers
             dbTicket.FlightDuration = ticket.FlightDuration;
             dbTicket.FlightNumber = ticket.FlightNumber;
             dbTicket.AirlineCompany = ticket.AirlineCompany;
+            dbTicket.AirlineTicketDetail.FlightDescription = ticket.AirlineTicketDetail.FlightDescription;
+            dbTicket.AirlineTicketDetail.HassMealService = ticket.AirlineTicketDetail.HassMealService;
             dbTicket.AirlineTicketDetail.MealPrice = ticket.AirlineTicketDetail.MealPrice;
             dbTicket.AirlineTicketDetail.MealDescription = ticket.AirlineTicketDetail.MealDescription;
-            dbTicket.AirlineTicketDetail.BaggagePrice = ticket.AirlineTicketDetail.BaggagePrice;
+            dbTicket.AirlineTicketDetail.HassBaggage = ticket.AirlineTicketDetail.HassBaggage;
             dbTicket.AirlineTicketDetail.BaggageAllowance = ticket.AirlineTicketDetail.BaggageAllowance;
             dbTicket.AirlineTicketDetail.Handluggage = ticket.AirlineTicketDetail.Handluggage;
             dbTicket.AirlineTicketDetail.IsReturn = ticket.AirlineTicketDetail.IsReturn;
@@ -313,8 +311,40 @@ namespace TraveAgency.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-    
+
         #endregion
+
+        #endregion
+
+        #region Detail
+        public async Task<IActionResult> Detail(int? id)
+        {
+
+            if(id == null)
+            {
+                return NotFound();
+
+            }
+            AirlineTicket dbTicket = await _db.AirlineTickets
+             .Include(t => t.DepartureAirport)
+             .Include(t => t.ArrivalAirport)
+             .Include(t => t.ReturnAirport)
+             .Include(t => t.TransferAirport)
+             .Include(t => t.AirlineTicketDetail)
+             .Include(t => t.SeatClass)
+             .FirstOrDefaultAsync(x => x.Id == id);
+            if (dbTicket == null)
+            {
+                return BadRequest();
+            }
+            ViewBag.DepartureAirport = await _db.Airports.ToListAsync();
+            ViewBag.ArrivalAirport = await _db.Airports.ToListAsync();
+            ViewBag.TransferAirport = await _db.Airports.ToListAsync();
+            ViewBag.ReturnAirport = await _db.Airports.ToListAsync();
+            ViewBag.SeatClass = await _db.SeatClasses.ToListAsync();
+
+            return View(dbTicket);
+        }
 
         #endregion
     }
