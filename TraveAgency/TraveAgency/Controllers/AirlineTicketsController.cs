@@ -347,5 +347,33 @@ namespace TraveAgency.Controllers
         }
 
         #endregion
+
+        #region Activity
+        public async Task<IActionResult> Activity(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            AirlineTicket dbTicket = await _db.AirlineTickets.FirstOrDefaultAsync(t => t.Id == id);
+
+            if (dbTicket == null)
+            {
+                return BadRequest();
+            }
+
+            if (dbTicket.IsDeactive)
+            {
+                dbTicket.IsDeactive = false;
+            }
+            else
+            {
+                dbTicket.IsDeactive = true;
+            }
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        #endregion
     }
 }
