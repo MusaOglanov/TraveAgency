@@ -19,6 +19,9 @@ namespace TraveAgency.DAL
         public DbSet<AirlineTicketDetail> AirlineTicketDetails { get; set; }
         public DbSet<Airport> Airports { get; set; }
         public DbSet<SeatClass> SeatClasses { get; set; }
+        public DbSet<Tour> Tours { get; set; }
+        public DbSet<TourCategory> TourCategories { get; set; }
+        public DbSet<TourHotel> TourHotels { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

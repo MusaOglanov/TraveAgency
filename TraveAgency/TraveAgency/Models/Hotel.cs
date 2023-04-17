@@ -13,6 +13,7 @@ namespace TraveAgency.Models
         public List<HotelImage> HotelImages { get; set; }
         public List<HotelHotelCategory> HotelHotelCategories { get; set; }
         public List<HotelRoomType> HotelRoomTypes { get; set; }
+        public List<TourHotel> TourHotels { get; set; }
         public HotelDetail HotelDetail { get; set; }
         public int Star { get; set; }
         public double Price { get; set; }

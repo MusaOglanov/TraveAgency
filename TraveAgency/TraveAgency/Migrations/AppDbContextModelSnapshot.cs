@@ -360,6 +360,96 @@ namespace TraveAgency.Migrations
                     b.ToTable("SeatClasses");
                 });
 
+            modelBuilder.Entity("TraveAgency.Models.Tour", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Adults")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Children")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDomestic")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TourCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TourDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TourCategoryId");
+
+                    b.ToTable("Tours");
+                });
+
+            modelBuilder.Entity("TraveAgency.Models.TourCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TourCategories");
+                });
+
+            modelBuilder.Entity("TraveAgency.Models.TourHotel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TourId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HotelId");
+
+                    b.HasIndex("TourId");
+
+                    b.ToTable("TourHotels");
+                });
+
             modelBuilder.Entity("TraveAgency.Models.AirlineTicket", b =>
                 {
                     b.HasOne("TraveAgency.Models.AirlineTicketDetail", "AirlineTicketDetail")
@@ -459,6 +549,36 @@ namespace TraveAgency.Migrations
                     b.Navigation("Hotel");
                 });
 
+            modelBuilder.Entity("TraveAgency.Models.Tour", b =>
+                {
+                    b.HasOne("TraveAgency.Models.TourCategory", "TourCategory")
+                        .WithMany("Tours")
+                        .HasForeignKey("TourCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TourCategory");
+                });
+
+            modelBuilder.Entity("TraveAgency.Models.TourHotel", b =>
+                {
+                    b.HasOne("TraveAgency.Models.Hotel", "Hotel")
+                        .WithMany("TourHotels")
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TraveAgency.Models.Tour", "Tour")
+                        .WithMany("TourHotels")
+                        .HasForeignKey("TourId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hotel");
+
+                    b.Navigation("Tour");
+                });
+
             modelBuilder.Entity("TraveAgency.Models.Hotel", b =>
                 {
                     b.Navigation("HotelDetail");
@@ -468,6 +588,8 @@ namespace TraveAgency.Migrations
                     b.Navigation("HotelImages");
 
                     b.Navigation("HotelRoomTypes");
+
+                    b.Navigation("TourHotels");
                 });
 
             modelBuilder.Entity("TraveAgency.Models.HotelCategory", b =>
@@ -478,6 +600,16 @@ namespace TraveAgency.Migrations
             modelBuilder.Entity("TraveAgency.Models.SeatClass", b =>
                 {
                     b.Navigation("AirlineTicket");
+                });
+
+            modelBuilder.Entity("TraveAgency.Models.Tour", b =>
+                {
+                    b.Navigation("TourHotels");
+                });
+
+            modelBuilder.Entity("TraveAgency.Models.TourCategory", b =>
+                {
+                    b.Navigation("Tours");
                 });
 #pragma warning restore 612, 618
         }

@@ -76,7 +76,7 @@
             </div>
 
         </div>
-       
+
 
 
         <div class="mb-3 d-none" id="TransAiport">
@@ -117,6 +117,7 @@
 
             <div class="form-group">
                 <div>
+
                     <label asp-for="DepartureDateTime">Departure- Flight Date:</label>
                     <input asp-for="DepartureDateTime" type="date" name="departureDate">
                     <span class="text-danger" asp-validation-for="DepartureDateTime"></span>
@@ -300,6 +301,24 @@
                 $('#BaggageId').addClass("d-none")
 
             }
+        });
+        $(document).ready(function () {
+            var todayDate = new Date().toISOString().slice(0, 10);
+            var currentTime = new Date().toTimeString().slice(0, 5);
+
+            if (currentTime == "00:00") {
+                todayDate = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+            }
+
+            $('input[type="date"]').attr("min", todayDate);
+            $('input[type="time"]').attr("value", currentTime);
+
+            $('input[type="date"]').on('change', function () {
+                var selectedDate = $(this).val();
+                if (selectedDate < todayDate) {
+                    $(this).val(todayDate);
+                }
+            });
         });
     </script>
 }
