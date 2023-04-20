@@ -6,6 +6,8 @@ namespace TraveAgency.Models
     public class SeatClass
     {
         public int Id { get; set; }
+        [Required]
+
         public string Name { get; set; }
         public int SeatPrice { get; set; }
         [MaxLength(500)]

@@ -1,0 +1,102 @@
+﻿@model Tour
+<div class="card-body">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Tour  Create</h5>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label class="form-label" asp-for="Photo"></label>
+            <input accept="image/*" asp-for="Photo" class="form-control">
+            <span class="text-danger" asp-validation-for="Photo"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="Name"></label>
+            <input asp-for="Name" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="IsDomestic"></label>
+            <input asp-for="IsDomestic">
+            <span class="text-danger" asp-validation-for="IsDomestic"></span>
+        </div>
+        <div class="form-group " >
+            <label class="form-label" asp-for="Country"></label>
+            <input asp-for="Country" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Country"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="City"></label>
+            <input asp-for="City" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="City"></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Categories</label>
+            <select class="form-control" name="tourCatsId">
+                @foreach (TourCategory categories in ViewBag.TourCategory)
+                {
+                    <option value="@categories.Id">@categories.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Hotel Room Type</label>
+            <select multiple class="form-control" name="hotelsId[]">
+                @foreach (Hotel hotels in ViewBag.TourHotel)
+                {
+                    <option value="@hotels.Id">@hotels.Name günlük qiymət @hotels.Price</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="StartDate">Start Date:</label>
+            <input asp-for="StartDate" type="date" name="startDate">
+            <span class="text-danger" asp-validation-for="StartDate"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EndDate">End Date:</label>
+            <input asp-for="EndDate" type="date" name="endDate">
+            <span class="text-danger" asp-validation-for="EndDate"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Duration">Duration day:</label>
+            <input asp-for="Duration">
+            <span class="text-danger" asp-validation-for="Duration"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Adults" class="form-label"></label>
+            <input asp-for="Adults" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Adults"></span>
+        </div>
+      
+          <div class="form-group">
+            <label asp-for="Children" class="form-label"></label>
+            <input asp-for="Children" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Children"></span>
+        </div>
+      
+
+        <div class="form-group">
+            <label class="form-label" asp-for="TourDescription"></label>
+            <textarea asp-for="TourDescription" type="text" class="form-control"></textarea>
+            <span class="text-danger" asp-validation-for="TourDescription"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="TourPrice"></label>
+
+            <input asp-for="TourPrice" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="TourPrice"></span>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-action="index" class="btn btn-secondary text-white">Go Back</a>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    
+}

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TraveAgency.Models
@@ -8,13 +9,18 @@ namespace TraveAgency.Models
     public class Tour
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public string  Image { get; set; }
+        public double TourPrice { get; set; }
+
         public bool IsDomestic { get; set; }
         public int  Duration { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        [Required]
         public string Country { get; set; }
+        [Required]
         public string City { get; set; }
         public int Adults { get; set; }
         public int? Children { get; set; }

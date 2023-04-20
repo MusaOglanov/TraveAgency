@@ -406,6 +406,9 @@ namespace TraveAgency.Migrations
                     b.Property<string>("TourDescription")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("TourPrice")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("TourCategoryId");

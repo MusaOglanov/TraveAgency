@@ -18,6 +18,8 @@ namespace TraveAgency.Models
         public int Star { get; set; }
         public double Price { get; set; }
         public string Country { get; set; }
+        [Required]
+
         public string City { get; set; }
         [NotMapped]
         public List<IFormFile> Photo { get; set; }
