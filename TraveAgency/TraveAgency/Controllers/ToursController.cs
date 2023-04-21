@@ -127,6 +127,10 @@ namespace TraveAgency.Controllers
                 .Include(t => t.TourHotels)
                 .ThenInclude(t => t.Hotel)
                 .FirstOrDefaultAsync(t => t.Id == id);
+            if (dbTour == null)
+            {
+                return BadRequest();
+            }
             ViewBag.TourCategory = await _db.TourCategories.ToListAsync();
             ViewBag.TourHotel = await _db.Hotels.ToListAsync();
 
@@ -185,5 +189,51 @@ namespace TraveAgency.Controllers
 
         #endregion
 
+        #region Detail
+        public async Task<IActionResult> Detail(int? id)
+        {
+            if(id== null)
+            {
+                return NotFound();
+            }
+            Tour dbTour = await _db.Tours
+                .Include(t => t.TourCategory)
+                .Include(t => t.TourHotels)
+                .ThenInclude(t => t.Hotel)
+                .FirstOrDefaultAsync(t => t.Id == id);
+          
+            ViewBag.TourCategory = await _db.TourCategories.ToListAsync();
+            ViewBag.TourHotel = await _db.Hotels.ToListAsync();
+            return View(dbTour);
+        }
+        #endregion
+
+        #region Activity
+        public async Task<IActionResult> Activity(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Tour dbTour = await _db.Tours.FirstOrDefaultAsync(t => t.Id == id);
+
+            if (dbTour == null)
+            {
+                return BadRequest();
+            }
+
+            if (dbTour.IsDeactive)
+            {
+                dbTour.IsDeactive = false;
+            }
+            else
+            {
+                dbTour.IsDeactive = true;
+            }
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        #endregion
     }
 }

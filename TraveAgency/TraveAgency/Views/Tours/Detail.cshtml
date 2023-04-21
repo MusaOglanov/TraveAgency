@@ -1,0 +1,87 @@
+﻿@model Tour
+
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <h6>Name</h6>
+        <h4>@Model.Name</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6>Country/City</h6>
+        <h4>@Model.Country/@Model.City</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Yerli/Xarici </h6>
+        @if (Model.IsDomestic)
+        {
+            <h4>Yerli</h4>
+
+        }
+        else
+        {
+        <h4>Xarici</h4>
+        }
+    </div>
+  
+
+</div>
+
+<div class="form-row">
+
+    <div class="form-group col-md-4">
+        <h6>Adults/Children</h6>
+        <h4>Adults:@Model.Adults/Child:@Model.Children</h4>
+    </div>
+
+    <div class="form-group col-md-4">
+        <h6> Categories </h6>
+        @foreach (TourCategory category in ViewBag.TourCategory)
+        {
+            <h4>@category.Name</h4>
+
+        }
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Price </h6>
+        <h4>@Model.TourPrice</h4>
+    </div>
+</div>
+<div class="form-row">
+   
+    <div class="form-group col-md-4">
+        <h6> Start Date </h6>
+        <h5>@Model.StartDate.ToString("dd/MMM/yyyy")</h5>
+        <h6> End Date </h6>
+        <h5>@Model.EndDate.ToString("dd/MMM/yyyy")</h5>
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Duration </h6>
+        <h4>@Model.Duration day</h4>
+    </div>
+    <div class="form-group col-md-4">
+        <h6> Hotels </h6>
+        @foreach (Hotel hotel in ViewBag.TourHotel)
+        {
+            <h4>@hotel.Name <b>qiymət:</b>  @hotel.Price</h4>
+
+        }
+    </div>
+</div>
+
+
+<div class="form-row ">
+    <div class="form-group col-md-6" style="text-align:center">
+        <h4 class="mb-4 text-md  ">Tour Description</h4>
+        <h5>@Model.TourDescription</h5>
+    </div>
+</div>
+<div class="d-flex flex-wrap">
+    <h3 class="mb-4 text-md  ">Image</h3>
+    
+        <div class="d-flex flex-column m-2">
+            <img style="width:150px;height:150px;" src="~/assets/img/@Model.Image" />
+        </div>
+    
+</div>
+
+<a asp-action="Index" class="btn btn-dark text-white">Go Back</a>
+
