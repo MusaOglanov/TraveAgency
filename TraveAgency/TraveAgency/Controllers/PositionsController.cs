@@ -83,7 +83,7 @@ namespace TraveAgency.Controllers
             {
                 return BadRequest();
             }
-            bool IsExist = await _db.Positions.AnyAsync(p => p.Name == position.Name&&p.Id!=id);
+            bool IsExist = await _db.Positions.AnyAsync(p => p.Name == position.Name && p.Id != id);
             if (IsExist)
             {
                 ModelState.AddModelError("Name", "Bu ad daha əvvəl istifadə edilib");
@@ -98,5 +98,48 @@ namespace TraveAgency.Controllers
         #endregion
 
         #endregion
+
+        #region Detail
+
+        public async Task<IActionResult> Detail(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+
+            }
+            Position dbPosition = await _db.Positions.FirstOrDefaultAsync(p => p.Id == id);
+            if (dbPosition == null)
+            {
+                return BadRequest();
+            }
+            return View(dbPosition);
+        }
+
+        #endregion
+        #region Activity
+        public async Task<IActionResult> Activity(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Position dbPosition = await _db.Positions.FirstOrDefaultAsync(p => p.Id == id);
+            if (dbPosition == null)
+            {
+                return BadRequest();
+            }
+            if (dbPosition.IsDeactive)
+            {
+                dbPosition.IsDeactive = false;
+            }
+            else
+            {
+                dbPosition.IsDeactive = true;
+            }
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+            #endregion
+        }
     }
 }
