@@ -64,5 +64,66 @@ namespace TraveAgency.Controllers
         #endregion
 
         #endregion
+
+        #region Update
+        #region get
+        public async Task<IActionResult> Update(int? id)
+        {
+            if(id== null)
+            {
+                return NotFound();
+            }
+            Employee dbEmployee =await _db.Employees.Include(e=>e.Position).FirstOrDefaultAsync(e => e.Id == id);
+            if(dbEmployee == null)
+            {
+                return BadRequest();
+            }
+            ViewBag.Positions = await _db.Positions.ToListAsync();
+
+            return View(dbEmployee);
+        }
+        #endregion
+
+        #region get
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int? id,Employee employee, int positionId, DateTime birthDate, DateTime hireDate)
+        {
+            if(id== null)
+            {
+                return NotFound();
+            }
+            Employee dbEmployee =await _db.Employees.Include(e=>e.Position).FirstOrDefaultAsync(e => e.Id == id);
+            if(dbEmployee == null)
+            {
+                return BadRequest();
+            }
+            ViewBag.Positions = await _db.Positions.ToListAsync();
+            dbEmployee.PositionId = positionId;
+
+            bool IsExist=await _db.Employees.AnyAsync(e=>e.FullName==employee.FullName&&e.Id!=id);
+            if(IsExist)
+            {
+                ModelState.AddModelError("FullName", "Bu ad daha evvel istifade edilib");
+                return View(dbEmployee);
+            }
+            bool Isexist = await _db.Employees.AnyAsync(e => e.Email == employee.Email && e.Id != id);
+            if (Isexist)
+            {
+                ModelState.AddModelError("Email", "Bu email artıq mövcuddur");
+                return View(dbEmployee);
+            }
+            dbEmployee.FullName = employee.FullName;
+            dbEmployee.Email = employee.Email;
+            dbEmployee.Mobile = employee.Mobile;
+            dbEmployee.Salary = employee.Salary;
+            dbEmployee.Notes = employee.Notes;
+            dbEmployee.Bithdate = birthDate;
+            dbEmployee.HireDate = hireDate;
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        #endregion
+        #endregion
     }
 }
