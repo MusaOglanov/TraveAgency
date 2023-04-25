@@ -28,7 +28,7 @@ namespace TraveAgency.Controllers
         #region get
         public IActionResult Create()
         {
-            return View();
+            return View();   
         }
         #endregion
 
