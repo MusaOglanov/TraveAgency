@@ -1,0 +1,65 @@
+﻿@model Employee
+<div class="card-body">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Employee  Create</h5>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+
+      
+        <div class="form-group">
+            <label class="form-label" asp-for="FullName"></label>
+            <input asp-for="FullName" type="text" class="form-control text-uppercase">
+            <span class="text-danger" asp-validation-for="FullName"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Categories</label>
+            <select class="form-control" name="positionId[]">
+                @foreach (Position position in ViewBag.Positions)
+                {
+                    <option value="@position.Id">@position.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Bithdate">Birth Date:</label>
+            <input asp-for="Bithdate" type="date" name="birthDate">
+            <span class="text-danger" asp-validation-for="Bithdate"></span>
+        </div>
+        <div class="form-group ">
+            <label class="form-label" asp-for="Mobile"></label>
+            <input asp-for="Mobile" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Mobile"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="Email"></label>
+            <input asp-for="Email" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="HireDate">Hire Date:</label>
+            <input asp-for="HireDate" type="date" name="hireDate">
+            <span class="text-danger" asp-validation-for="HireDate"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="Salary"></label>
+            <input asp-for="Salary" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Salary"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="Notes"></label>
+            <textarea asp-for="Notes" type="text" class="form-control"></textarea>
+            <span class="text-danger" asp-validation-for="Notes"></span>
+        </div>
+
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-action="index" class="btn btn-secondary text-white">Go Back</a>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+   
+}

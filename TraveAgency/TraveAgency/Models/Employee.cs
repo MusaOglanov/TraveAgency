@@ -1,13 +1,16 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TraveAgency.Models
 {
     public class Employee
     {
         public int Id { get; set; }
+        [Required]
         public string FullName { get; set; }
         public double Salary { get; set; }
         public long Mobile { get; set; }
+        [Required]
         public string Email { get; set; }
         public DateTime Bithdate { get; set; }
         public DateTime HireDate { get; set; }
