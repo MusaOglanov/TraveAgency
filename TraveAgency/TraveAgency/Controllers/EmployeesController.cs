@@ -125,5 +125,52 @@ namespace TraveAgency.Controllers
         }
         #endregion
         #endregion
+
+        #region Detail
+        public async Task<IActionResult> Detail(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Employee dbEmployee = await _db.Employees.Include(e => e.Position).FirstOrDefaultAsync(e => e.Id == id);
+            if (dbEmployee == null)
+            {
+                return BadRequest();
+            }
+            ViewBag.Positions = await _db.Positions.ToListAsync();
+            return View(dbEmployee);
+        }
+
+
+        #endregion
+
+        #region Activity
+        public async Task<IActionResult> Status(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Employee dbEmployee = await _db.Employees.Include(e => e.Position).FirstOrDefaultAsync(e => e.Id == id);
+
+            if (dbEmployee == null)
+            {
+                return BadRequest();
+            }
+
+            if (dbEmployee.Status)
+            {
+                dbEmployee.Status = false;
+            }
+            else
+            {
+                dbEmployee.Status = true;
+            }
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        #endregion
     }
 }

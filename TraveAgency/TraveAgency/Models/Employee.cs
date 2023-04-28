@@ -17,7 +17,7 @@ namespace TraveAgency.Models
         public Position Position { get; set; }
         public int PositionId { get; set; }
         public string  Notes { get; set; }
-        public bool  IsDeactive { get; set; }
+        public bool  Status { get; set; }
 
     }
 }

@@ -179,16 +179,15 @@ namespace TraveAgency.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeactive")
-                        .HasColumnType("bit");
 
                     b.Property<long>("Mobile")
                         .HasColumnType("bigint");
@@ -201,6 +200,9 @@ namespace TraveAgency.Migrations
 
                     b.Property<double>("Salary")
                         .HasColumnType("float");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
