@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TraveAgency.Models;
 
 namespace TraveAgency.DAL
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -56,6 +58,12 @@ namespace TraveAgency.DAL
                 .WithMany()
                 .HasForeignKey(t => t.ReturnAirportId)
                 .OnDelete(DeleteBehavior.Restrict);
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityUserLogin<string>>(entity =>
+            {
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+            });
         }
     }
 }

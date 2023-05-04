@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TraveAgency.DAL;
+using TraveAgency.Models;
 
 namespace TraveAgency
 {
@@ -30,6 +32,17 @@ namespace TraveAgency
             {
                 option.UseSqlServer(_configuration.GetConnectionString("Default"));
             });
+            services.AddIdentity<AppUser, IdentityRole>(identityOption =>
+                {
+                    identityOption.Password.RequiredLength = 8;
+                    identityOption.Password.RequireLowercase = true;
+                    identityOption.Password.RequireUppercase = true;
+                    identityOption.Password.RequireNonAlphanumeric = false;
+                    identityOption.Lockout.AllowedForNewUsers = true;
+                    identityOption.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+                    identityOption.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._";
+                    identityOption.User.RequireUniqueEmail = true;
+                }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

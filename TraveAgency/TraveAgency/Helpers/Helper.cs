@@ -1,4 +1,4 @@
-﻿namespace AllUp3.Helpers
+﻿namespace TraveAgency.Helpers
 {
     public class Helper
     {
