@@ -193,3 +193,5 @@ C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\bin\Debug\net5.0\Micr
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Account\Index.cshtml.g.cs
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Users\Index.cshtml.g.cs
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Users\Create.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Users\Update.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Users\Detail.cshtml.g.cs

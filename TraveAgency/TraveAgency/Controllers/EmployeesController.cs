@@ -145,7 +145,7 @@ namespace TraveAgency.Controllers
 
         #endregion
 
-        #region Activity
+        #region Status
         public async Task<IActionResult> Status(int? id)
         {
             if (id == null)
