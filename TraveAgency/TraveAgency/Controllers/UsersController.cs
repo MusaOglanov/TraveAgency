@@ -93,7 +93,7 @@ namespace TraveAgency.Controllers
             {
                 return BadRequest();
             }
-            IdentityResult identityResult = await _userManager.UpdateAsync(appUser);
+            IdentityResult identityResult = await _userManager.UpdateAsync(dbAppUser);
             if (!identityResult.Succeeded)
             {
                 foreach (IdentityError error in identityResult.Errors)
@@ -110,6 +110,7 @@ namespace TraveAgency.Controllers
             dbAppUser.UserName = appUser.UserName;
             dbAppUser.PasswordHash = appUser.PasswordHash;
             await _userManager.AddToRoleAsync(appUser, Helper.Roles.Admin.ToString());
+            await _userManager.UpdateAsync(dbAppUser);
             return RedirectToAction("Index");
 
         }
