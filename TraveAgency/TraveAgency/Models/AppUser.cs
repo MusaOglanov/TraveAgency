@@ -7,5 +7,6 @@ namespace TraveAgency.Models
         public string Name { get; set; }
         public string SurName { get; set; }
         public bool IsDeactive { get; set; }
+        public bool IsRemember { get; set; }
     }
 }

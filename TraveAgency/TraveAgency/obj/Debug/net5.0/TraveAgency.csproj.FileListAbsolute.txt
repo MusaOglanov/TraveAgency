@@ -195,3 +195,4 @@ C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razo
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Users\Create.cshtml.g.cs
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Users\Update.cshtml.g.cs
 C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Users\Detail.cshtml.g.cs
+C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\obj\Debug\net5.0\Razor\Views\Account\LogIn.cshtml.g.cs
