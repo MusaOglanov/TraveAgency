@@ -135,7 +135,36 @@ namespace TraveAgency.Controllers
 
         #endregion
 
-       
+        #region Activity
+
+        public async Task<IActionResult> Activity(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            AppUser dbAppUser = await _userManager.Users.FirstOrDefaultAsync(a => a.Id == id);
+            if (dbAppUser == null)
+            {
+                return BadRequest();
+            }
+
+            if (dbAppUser.IsDeactive)
+            {
+                dbAppUser.IsDeactive = false;
+            }  
+            else
+            {
+                dbAppUser.IsDeactive = true;
+            }
+
+            await _userManager.UpdateAsync(dbAppUser);
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+
 
         #region Roles
         public async Task CreateRoles()
