@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using TraveAgency.DAL;
 using TraveAgency.Models;
 using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TraveAgency.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly UserManager<AppUser> _userManager;

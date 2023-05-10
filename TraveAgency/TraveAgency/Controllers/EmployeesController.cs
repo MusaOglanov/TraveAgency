@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,6 +10,8 @@ using TraveAgency.Models;
 
 namespace TraveAgency.Controllers
 {
+    [Authorize]
+
     public class EmployeesController : Controller
     {
         private readonly AppDbContext _db;

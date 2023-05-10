@@ -592,6 +592,52 @@ namespace TraveAgency.Migrations
                     b.ToTable("HotelRoomTypes");
                 });
 
+            modelBuilder.Entity("TraveAgency.Models.Income", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("About")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("KassaId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Money")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("KassaId");
+
+                    b.ToTable("Incomes");
+                });
+
+            modelBuilder.Entity("TraveAgency.Models.Kassa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Money")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Kassa");
+                });
+
             modelBuilder.Entity("TraveAgency.Models.Position", b =>
                 {
                     b.Property<int>("Id")
@@ -901,6 +947,23 @@ namespace TraveAgency.Migrations
                     b.Navigation("Hotel");
                 });
 
+            modelBuilder.Entity("TraveAgency.Models.Income", b =>
+                {
+                    b.HasOne("TraveAgency.Models.AppUser", "AppUser")
+                        .WithMany("Incomes")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("TraveAgency.Models.Kassa", "Kassa")
+                        .WithMany("Incomes")
+                        .HasForeignKey("KassaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Kassa");
+                });
+
             modelBuilder.Entity("TraveAgency.Models.Tour", b =>
                 {
                     b.HasOne("TraveAgency.Models.TourCategory", "TourCategory")
@@ -931,6 +994,11 @@ namespace TraveAgency.Migrations
                     b.Navigation("Tour");
                 });
 
+            modelBuilder.Entity("TraveAgency.Models.AppUser", b =>
+                {
+                    b.Navigation("Incomes");
+                });
+
             modelBuilder.Entity("TraveAgency.Models.Hotel", b =>
                 {
                     b.Navigation("HotelDetail");
@@ -947,6 +1015,11 @@ namespace TraveAgency.Migrations
             modelBuilder.Entity("TraveAgency.Models.HotelCategory", b =>
                 {
                     b.Navigation("HotelHotelCategories");
+                });
+
+            modelBuilder.Entity("TraveAgency.Models.Kassa", b =>
+                {
+                    b.Navigation("Incomes");
                 });
 
             modelBuilder.Entity("TraveAgency.Models.Position", b =>

@@ -1,4 +1,5 @@
 ﻿using AllUp3.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using TraveAgency.Models;
 
 namespace TraveAgency.Controllers
 {
+    [Authorize]
     public class HotelsController : Controller
     {
         private readonly AppDbContext _db;

@@ -1,0 +1,56 @@
+﻿@model List<Income>
+<div class="col-12">
+    <div class="card">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-header">Incomes</h5>
+            <a asp-action="Create" class="btn btn-outline-primary btn-sm" style="margin-right:20px">Create</a>
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-striped dataTable no-footer" id="table-1" role="grid" aria-describedby="table-1_info">
+                            <thead>
+                                <tr role="row">
+
+                                    <th>Money</th>
+                                    <th>About</th>
+                                    <th>Create Time</th>
+                                    <th>User</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (Income item in Model)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            @item.Money
+                                        </td>
+
+                                        <td>
+                                            @item.About
+                                        </td>
+
+                                        <td>
+                                            @item.CreateTime.ToString("dd/MMMM/yyy hh:mm")
+                                        </td>
+
+                                        <td>
+                                            @item.AppUser.UserName
+                                        </td>
+
+                                    </tr>
+
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

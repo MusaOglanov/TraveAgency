@@ -26,6 +26,8 @@ namespace TraveAgency.DAL
         public DbSet<TourHotel> TourHotels { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Kassa> Kassa { get; set; }
+        public DbSet<Income> Incomes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
