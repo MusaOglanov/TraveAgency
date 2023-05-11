@@ -29,6 +29,7 @@ namespace TraveAgency.DAL
         public DbSet<Kassa> Kassa { get; set; }
         public DbSet<Income> Incomes { get; set; }
         public DbSet<Expense> Expenses { get; set; }
+        public DbSet<SalaryPaid> SalaryPaids { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TraveAgency.Models
@@ -18,6 +19,8 @@ namespace TraveAgency.Models
         public int PositionId { get; set; }
         public string  Notes { get; set; }
         public bool  Status { get; set; }
+        public ICollection<Employee> Employees { get; set; }
+
 
     }
 }

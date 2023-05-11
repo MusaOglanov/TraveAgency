@@ -390,6 +390,9 @@ namespace TraveAgency.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -413,6 +416,8 @@ namespace TraveAgency.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("PositionId");
 
@@ -693,6 +698,43 @@ namespace TraveAgency.Migrations
                     b.ToTable("Positions");
                 });
 
+            modelBuilder.Entity("TraveAgency.Models.SalaryPaid", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("About")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KassaId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Money")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("KassaId");
+
+                    b.ToTable("SalaryPaids");
+                });
+
             modelBuilder.Entity("TraveAgency.Models.SeatClass", b =>
                 {
                     b.Property<int>("Id")
@@ -919,6 +961,10 @@ namespace TraveAgency.Migrations
 
             modelBuilder.Entity("TraveAgency.Models.Employee", b =>
                 {
+                    b.HasOne("TraveAgency.Models.Employee", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("EmployeeId");
+
                     b.HasOne("TraveAgency.Models.Position", "Position")
                         .WithMany("Employees")
                         .HasForeignKey("PositionId")
@@ -1014,6 +1060,31 @@ namespace TraveAgency.Migrations
                     b.Navigation("Kassa");
                 });
 
+            modelBuilder.Entity("TraveAgency.Models.SalaryPaid", b =>
+                {
+                    b.HasOne("TraveAgency.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("TraveAgency.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TraveAgency.Models.Kassa", "Kassa")
+                        .WithMany()
+                        .HasForeignKey("KassaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Kassa");
+                });
+
             modelBuilder.Entity("TraveAgency.Models.Tour", b =>
                 {
                     b.HasOne("TraveAgency.Models.TourCategory", "TourCategory")
@@ -1049,6 +1120,11 @@ namespace TraveAgency.Migrations
                     b.Navigation("Expenses");
 
                     b.Navigation("Incomes");
+                });
+
+            modelBuilder.Entity("TraveAgency.Models.Employee", b =>
+                {
+                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("TraveAgency.Models.Hotel", b =>
