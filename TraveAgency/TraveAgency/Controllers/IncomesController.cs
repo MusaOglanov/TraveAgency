@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TraveAgency.DAL;
 using TraveAgency.Models;
@@ -40,10 +42,25 @@ namespace TraveAgency.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Income income)
         {
-            var user = await _userManager.GetUserAsync(User);
-            income.AppUserId = user.Id;
             var kassa = await _db.Kassa.FirstOrDefaultAsync();
+            if (kassa == null)
+            {
+                ModelState.AddModelError("Money", "kassa tapılmadı");
+                return View();
+            }
             income.KassaId = kassa.Id;
+            kassa.Money += income.Money;
+            _db.Kassa.Update(kassa);
+
+            var user = await _userManager.GetUserAsync(User);
+            if(user == null)
+            {
+                ModelState.AddModelError("Money", "User tapılmadı");
+                return View();
+            }
+            income.AppUserId = user.Id;
+
+            income.CreateTime = DateTime.Now;
             await _db.Incomes.AddAsync(income);
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");

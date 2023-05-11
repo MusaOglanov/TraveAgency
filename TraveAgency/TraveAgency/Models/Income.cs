@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TraveAgency.Models
 {
@@ -6,6 +7,7 @@ namespace TraveAgency.Models
     {
         public int Id { get; set; }
         public decimal  Money { get; set; }
+        [Required]
         public string  About { get; set; }
         public DateTime  CreateTime { get; set; }
         public Kassa Kassa { get; set; }

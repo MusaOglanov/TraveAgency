@@ -11,5 +11,7 @@ namespace TraveAgency.Models
         public bool IsDeactive { get; set; }
         public bool IsRemember { get; set; }
         public ICollection<Income> Incomes { get; set; }
+        public ICollection<Expense> Expenses { get; set; }
+
     }
 }

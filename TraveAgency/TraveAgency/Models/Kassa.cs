@@ -7,5 +7,6 @@ namespace TraveAgency.Models
         public int Id { get; set; }
         public decimal Money { get; set; }
         public ICollection<Income> Incomes { get; set; }
+        public ICollection<Expense> Expenses { get; set; }
     }
 }

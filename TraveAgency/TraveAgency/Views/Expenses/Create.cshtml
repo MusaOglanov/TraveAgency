@@ -1,0 +1,27 @@
+﻿@model Expense
+<div class="card-body">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Expense  Create</h5>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+
+
+        <div class="form-group">
+            <label class="form-label" asp-for="Money"></label>
+            <input asp-for="Money" type="text" class="form-control text-uppercase">
+            <span class="text-danger" asp-validation-for="Money"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="About"></label>
+            <input asp-for="About" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="About"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-action="index" class="btn btn-secondary text-white">Go Back</a>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}
