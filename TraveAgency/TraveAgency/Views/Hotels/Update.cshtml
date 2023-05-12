@@ -63,7 +63,7 @@
 
         <div class="form-group">
             <label for="exampleFormControlSelect1">Categories</label>
-            <select class="form-control" name="hotelCatsId[]">
+            <select style="height:100%" multiple class="form-control" name="hotelCatsId[]">
                 @foreach (HotelCategory hotelCategory in ViewBag.HotelCategory)
                 {
                     if (Model.HotelHotelCategories.Any(c => c.HotelCategoryId == hotelCategory.Id))
@@ -82,7 +82,7 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Hotel Room Type</label>
-            <select multiple class="form-control" name="hoteRoomTypesId[]">
+            <select style="height:100px" multiple class="form-control" name="hoteRoomTypesId[]">
                 @foreach (HotelRoomType hotelRoomType in ViewBag.HotelRoomType)
                 {
                     if (Model.HotelRoomTypes.Any(c => c.HotelId == hotelRoomType.Id))
@@ -213,7 +213,23 @@
                 }
             });
            
-        })
+        });
+        $(document).ready(function () {
+            var todayDate = new Date().toISOString().slice(0, 10);
+            var currentTime = new Date().toTimeString().slice(0, 5);
 
+            if (currentTime == "00:00") {
+                todayDate = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+            }
+
+            $('input[type="date"]').attr("min", todayDate);
+            $('input[type="time"]').attr("value", currentTime);
+
+            $('input[type="date"]').on('change', function () {
+                var selectedDate = $(this).val();
+                if (selectedDate < todayDate) {
+                    $(this).val(todayDate);
+                }
+            });
     </script>
 }

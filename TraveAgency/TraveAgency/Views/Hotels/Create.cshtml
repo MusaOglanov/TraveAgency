@@ -38,35 +38,37 @@
             <span class="text-danger" asp-validation-for="HotelDetail.Adress"></span>
         </div>
 
-        <div class="form-group">
+        <div class="form-label">
             <label for="exampleFormControlSelect1">Categories</label>
-            <select  class="form-control" name="hotelCatsId[]">
+            <select style="height:100%" multiple class="form-control" name="hotelCatsId">
                 @foreach (HotelCategory hotelCategory in ViewBag.HotelCategory)
                 {
                     <option value="@hotelCategory.Id">@hotelCategory.Name</option>
                 }
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-label">
             <label for="exampleFormControlSelect1">Hotel Room Type</label>
-            <select multiple class="form-control" name="hoteRoomTypesId[]">
+            <select style="height:100px" multiple class="form-control" name="hoteRoomTypesId[]">
                 @foreach (HotelRoomType hotelRoomType in ViewBag.HotelRoomType)
                 {
                     <option value="@hotelRoomType.Id">@hotelRoomType.Name günlük qiymət @hotelRoomType.Price</option>
                 }
             </select>
+            <span class="text-danger" asp-validation-for="HotelHotelCategories"></span>
+
         </div>
         <div class="form-group">
             <label asp-for="HotelDetail.CheckInTime">Check in Time:</label>
-            <input asp-for="HotelDetail.CheckInTime" type="date" name="checkInTime">
+            <input asp-for="HotelDetail.CheckInTime" type="date" name="checkInDate">
             <input asp-for="HotelDetail.CheckInTime" type="time" name="checkInTime">
             <span class="text-danger" asp-validation-for="HotelDetail.CheckInTime"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="HotelDetail.CheckOutTime">Check Out Time:</label>
-            <input asp-for="HotelDetail.CheckOutTime" type="date" name="checkOutTime">
-            <input asp-for="HotelDetail.CheckOutTime" type="time" name="checkOutTime">
+            <input type="date" asp-for="HotelDetail.CheckOutTime" name="checkOutDate">
+            <input  type="time" asp-for="HotelDetail.CheckOutTime" name="checkOutTime">
             <span class="text-danger" asp-validation-for="HotelDetail.CheckOutTime"></span>
         </div>
         <div class="mb-3">
@@ -130,6 +132,23 @@
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
     <script>
+         $(document).ready(function () {
+            var todayDate = new Date().toISOString().slice(0, 10);
+            var currentTime = new Date().toTimeString().slice(0, 5);
+
+            if (currentTime == "00:00") {
+                todayDate = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+            }
+
+            $('input[type="date"]').attr("min", todayDate);
+            $('input[type="time"]').attr("value", currentTime);
+
+            $('input[type="date"]').on('change', function () {
+                var selectedDate = $(this).val();
+                if (selectedDate < todayDate) {
+                    $(this).val(todayDate);
+                }
+            });
         if ($('#HotelDetail_IsDomestic').prop('checked')) {
             $('#CountrId').removeClass("d-none")
         }
@@ -147,6 +166,6 @@
 
             }
         });
-        
+       
     </script>
 }

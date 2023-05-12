@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using TraveAgency.DAL;
 using TraveAgency.Models;
@@ -23,18 +24,20 @@ namespace TraveAgency.Controllers
             _db = db;
             _env = env;
         }
+
+        #region INDEX
         public async Task<IActionResult> Index()
         {
             List<Hotel> hotels = await _db.Hotels
-                .Include(h=>h.HotelDetail)
-                .Include(h=>h.HotelImages)
-                .Include(h=>h.HotelRoomTypes)
-                .Include(h=>h.HotelHotelCategories)
-                .ThenInclude(h=>h.HotelCategory)
+                .Include(h => h.HotelDetail)
+                .Include(h => h.HotelImages)
+                .Include(h => h.HotelRoomTypes)
+                .Include(h => h.HotelHotelCategories)
+                .ThenInclude(h => h.HotelCategory)
                 .ToListAsync();
             return View(hotels);
         }
-
+        #endregion
 
         #region Create
 
@@ -48,15 +51,17 @@ namespace TraveAgency.Controllers
         }
         #endregion
 
-
-
         #region post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Hotel hotel, int[] hotelCatsId, int[] hoteRoomTypesId, string checkInTime, string checkOutTime)
+        public async Task<IActionResult> Create(Hotel hotel, int hotelCatsId, int[] hoteRoomTypesId,
+            string checkInTime, string checkOutTime,
+            string checkInDate, string checkOutDate)
         {
             ViewBag.HotelRoomType = await _db.HotelRoomTypes.ToListAsync();
             ViewBag.HotelCategory = await _db.HotelCategories.ToListAsync();
+
+            #region Images
             List<HotelImage> hotelImages = new List<HotelImage>();
             if (hotel.Photo == null)
             {
@@ -85,22 +90,32 @@ namespace TraveAgency.Controllers
                 hotelImages.Add(hotelImage);
             }
             hotel.HotelImages = hotelImages;
-            
+            #endregion
+
+            #region Hotel Category
             List<HotelHotelCategory> hotelHotelCategories = new List<HotelHotelCategory>();
-            foreach (int  hotelCatId in hotelCatsId)
+
+           
+
+            foreach (int hotelCatId in hotelCatsId)
             {
+                if (hotelCatId == null)
+                {
+                    ModelState.AddModelError("Name", "Category boş ola bilməz");
+                    return View();
+                }
                 HotelHotelCategory hotelHotelCategory = new HotelHotelCategory
                 {
+
                     HotelCategoryId = hotelCatId,
                 };
+               
                 hotelHotelCategories.Add(hotelHotelCategory);
             }
-            if (hotel.HotelDetail.IsDomestic == true)
-            {
-            }
+
             hotel.HotelHotelCategories = hotelHotelCategories;
             List<HotelRoomType> hotelRoomTypes = new List<HotelRoomType>();
-            
+
             foreach (int hoteRoomTypeId in hoteRoomTypesId)
             {
                 HotelRoomType hotelRoomType = new HotelRoomType
@@ -109,8 +124,10 @@ namespace TraveAgency.Controllers
                 };
                 hotelRoomTypes.Add(hotelRoomType);
             }
-            
-            
+
+            #endregion
+
+            #region Room Type
             hotel.HotelRoomTypes = hotelRoomTypes;
             if (hotel.Star < 1 || hotel.Star > 5)
             {
@@ -122,9 +139,35 @@ namespace TraveAgency.Controllers
                 ModelState.AddModelError("HotelDetail.Rating", "Please choose a number between 1 and 10 ");
                 return View();
             }
+            #endregion
 
-            hotel.HotelDetail.CheckInTime = DateTime.Parse(checkInTime);
-            hotel.HotelDetail.CheckOutTime = DateTime.Parse(checkOutTime);
+            #region Check In And Out Time
+            string checkInDateTimeStr = $"{checkInDate} {checkInTime}";
+            DateTime checkInDateTime = DateTime.Parse(checkInDateTimeStr);
+
+            DateTime currentInTime = DateTime.Now;
+            if (checkInDateTime < currentInTime)
+            {
+                ModelState.AddModelError("HotelDetail.CheckInTime", "Keçmiş tarixlər seçə bilməzsiniz");
+                return View();
+            }
+            hotel.HotelDetail.CheckInTime = checkInDateTime;
+
+            string checkOutDateTimeStr = $"{checkOutDate} {checkOutTime}";
+            DateTime checkOutDateTime = DateTime.Parse(checkOutDateTimeStr);
+            if (checkInDateTime > checkOutDateTime)
+            {
+                ModelState.AddModelError("HotelDetail.CheckOutTime", "Check In və Check Out Tarixləri eyni ola bilməz");
+                return View();
+            }
+            DateTime currentOutTime = DateTime.Now;
+            if (checkOutDateTime < currentOutTime)
+            {
+                ModelState.AddModelError("HotelDetail.CheckOutTime", "Keçmiş tarixlər seçə bilməzsiniz");
+                return View();
+            }
+            hotel.HotelDetail.CheckOutTime = checkOutDateTime;
+            #endregion
 
             await _db.Hotels.AddAsync(hotel);
             await _db.SaveChangesAsync();
@@ -134,7 +177,6 @@ namespace TraveAgency.Controllers
         #endregion
 
         #endregion
-
 
         #region Update
 
@@ -152,7 +194,7 @@ namespace TraveAgency.Controllers
                .Include(h => h.HotelHotelCategories)
                .ThenInclude(h => h.HotelCategory)
                .FirstOrDefaultAsync(x => x.Id == id);
-            ViewBag.HotelRoomType = await _db.HotelRoomTypes.ToListAsync();
+            ViewBag.HotelRoomType = await _db.HotelRoomTypes.Where(r=>r.HotelId==dbHotel.Id).ToListAsync();
             ViewBag.HotelCategory = await _db.HotelCategories.ToListAsync();
             return View(dbHotel);
 
@@ -164,8 +206,11 @@ namespace TraveAgency.Controllers
         #region post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? id, Hotel hotel, int[] hotelCatsId, int[] hoteRoomTypesId, DateTime checkInTime, DateTime checkOutTime)
+        public async Task<IActionResult> Update(int? id, Hotel hotel, int[] hotelCatsId, int[] hoteRoomTypesId, 
+            string checkInDate, string checkOutDate,
+            string checkInTime, string checkOutTime)
         {
+            #region Errors, Include, ViewBag 
             if (id == null)
             {
                 return NotFound();
@@ -177,13 +222,15 @@ namespace TraveAgency.Controllers
                .Include(h => h.HotelHotelCategories)
                .ThenInclude(h => h.HotelCategory)
                .FirstOrDefaultAsync(x => x.Id == id);
-            if(dbHotel == null)
+            if (dbHotel == null)
             {
                 return BadRequest();
             }
             ViewBag.HotelRoomType = await _db.HotelRoomTypes.ToListAsync();
             ViewBag.HotelCategory = await _db.HotelCategories.ToListAsync();
+            #endregion
 
+            #region Images
             List<HotelImage> hotelImages = new List<HotelImage>();
             if (hotel.Photo != null)
             {
@@ -211,6 +258,10 @@ namespace TraveAgency.Controllers
                 }
             }
             dbHotel.HotelImages.AddRange(hotelImages);
+
+            #endregion
+
+            #region Hotel Category And Room Type
             List<HotelHotelCategory> hotelHotelCategories = new List<HotelHotelCategory>();
             foreach (int hotelCatId in hotelCatsId)
             {
@@ -220,7 +271,7 @@ namespace TraveAgency.Controllers
                 };
                 hotelHotelCategories.Add(hotelHotelCategory);
             }
-          
+
             dbHotel.HotelHotelCategories = hotelHotelCategories;
             List<HotelRoomType> hotelRoomTypes = new List<HotelRoomType>();
 
@@ -232,7 +283,9 @@ namespace TraveAgency.Controllers
                 };
                 hotelRoomTypes.Add(hotelRoomType);
             }
-            dbHotel.HotelHotelCategories= hotelHotelCategories;
+            dbHotel.HotelHotelCategories = hotelHotelCategories;
+
+            //----------------ROOM TYPE----------
 
             dbHotel.HotelRoomTypes = hotelRoomTypes;
 
@@ -246,7 +299,34 @@ namespace TraveAgency.Controllers
                 ModelState.AddModelError("HotelDetail.Rating", "Please choose a number between 1 and 10 ");
                 return View();
             }
+            #endregion
 
+            #region CHECK IN AND OUT TIME
+            string checkInDateTimeStr = $"{checkInDate} {checkInTime}";
+            DateTime checkInDateTime = DateTime.Parse(checkInDateTimeStr);
+            DateTime currentInTime = DateTime.Now;
+            if (checkInDateTime < currentInTime)
+            {
+                ModelState.AddModelError("HotelDetail.CheckInTime", "Keçmiş tarixlər seçə bilməzsiniz");
+                return View();
+            }
+            dbHotel.HotelDetail.CheckInTime = checkInDateTime;
+
+            string checkOutDateTimeStr = $"{checkOutDate} {checkOutTime}";
+            DateTime checkOutDateTime = DateTime.Parse(checkOutDateTimeStr);
+            if (checkInDateTime < checkOutDateTime)
+            {
+                ModelState.AddModelError("HotelDetail.CheckOutTime", "Check In və Check Out Tarixləri eyni ola bilməz");
+                return View();
+            }
+            DateTime currentOutTime = DateTime.Now;
+            if (checkOutDateTime < currentOutTime)
+            {
+                ModelState.AddModelError("HotelDetail.CheckOutTime", "Keçmiş tarixlər seçə bilməzsiniz");
+                return View();
+            }
+            dbHotel.HotelDetail.CheckOutTime = checkOutDateTime;
+            #endregion
 
 
             dbHotel.Name = hotel.Name;
@@ -262,8 +342,7 @@ namespace TraveAgency.Controllers
             dbHotel.HotelDetail.RoomAvailable = hotel.HotelDetail.RoomAvailable;
             dbHotel.HotelDetail.Rating = hotel.HotelDetail.Rating;
             dbHotel.HotelDetail.IsDomestic = hotel.HotelDetail.IsDomestic;
-            dbHotel.HotelDetail.CheckInTime = checkInTime;
-            dbHotel.HotelDetail.CheckOutTime = checkOutTime;
+          
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Index");
@@ -271,6 +350,9 @@ namespace TraveAgency.Controllers
 
 
         }
+        #endregion
+
+
         #endregion
 
         #region Detail
@@ -296,9 +378,6 @@ namespace TraveAgency.Controllers
 
         #endregion
 
-
-        #endregion
-
         #region DeleteImages
         public async Task<IActionResult> DeleteImage(int hotelImageId)
         {
@@ -311,7 +390,6 @@ namespace TraveAgency.Controllers
             return Ok();
         }
         #endregion
-
 
         #region Activity
         public async Task<IActionResult> Activity(int? id)

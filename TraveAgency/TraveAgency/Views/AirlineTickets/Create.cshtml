@@ -75,9 +75,6 @@
             </div>
 
         </div>
-
-
-
         <div class="mb-3 d-none" id="TransAiport">
 
             <div class="mb-3   ">
@@ -139,7 +136,6 @@
             <div class="d-none" id="returnTime">
                 <label asp-for="AirlineTicketDetail.ReturnTime">Return- Flight Date:</label>
                 <input asp-for="AirlineTicketDetail.ReturnTime" type="date" name="returnDate">
-                <span class="text-danger" asp-validation-for="DepartureDateTime"></span>
                 <input asp-for="AirlineTicketDetail.ReturnTime" type="time" name="returnTime">
                 <span class="text-danger" asp-validation-for="AirlineTicketDetail.ReturnTime"></span>
 
@@ -149,7 +145,6 @@
         <div class="d-none" id="TransTime">
             <label asp-for="AirlineTicketDetail.TransferTime">Transfer- Flight Date:</label>
             <input asp-for="AirlineTicketDetail.TransferTime" type="date" name="transferDate">
-            <span class="text-danger" asp-validation-for="DepartureDateTime"></span>
             <input asp-for="AirlineTicketDetail.TransferTime" type="time" name="transferTime">
             <span class="text-danger" asp-validation-for="AirlineTicketDetail.TransferTime"></span>
         </div>
