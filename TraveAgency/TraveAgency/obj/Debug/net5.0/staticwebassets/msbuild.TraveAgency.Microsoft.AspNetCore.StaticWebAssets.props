@@ -10736,6 +10736,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\05f97e41-5362-4a25-9704-659d0529ba36atomm.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\0f940c39-bdf1-416b-8f61-782e797509cfak-47-guns.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>TraveAgency</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/TraveAgency</BasePath>
+      <RelativePath>assets\img\0f940c39-bdf1-416b-8f61-782e797509cfak-47-guns.jpg</RelativePath>
+      <AssetKind></AssetKind>
+      <AssetMode></AssetMode>
+      <AssetRole></AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\0f940c39-bdf1-416b-8f61-782e797509cfak-47-guns.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\img\121f5662-7e28-4e38-baa1-955cc0563481battttery.png))">
       <SourceType>Package</SourceType>
       <SourceId>TraveAgency</SourceId>

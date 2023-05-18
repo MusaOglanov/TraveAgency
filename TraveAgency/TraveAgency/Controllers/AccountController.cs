@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Logging;
 using System.Threading.Tasks;
 using TraveAgency.Models;
+using TraveAgency.ViewModels;
 
 namespace TraveAgency.Controllers
 {
@@ -23,23 +25,24 @@ namespace TraveAgency.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> LogIn(AppUser user)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogIn(LoginVM loginVM)
         {
-            AppUser appUser =await _userManager.FindByNameAsync(user.UserName);
+            AppUser appUser =await _userManager.FindByNameAsync(loginVM.UserName);
             if (appUser == null)
             {
-                ModelState.AddModelError("UserName", "Bele username ve ya parol  yoxdur");
+                ModelState.AddModelError("", "Bele username ve ya parol  yoxdur");
                 return View();
             }
             if (appUser.IsDeactive)
             {
-                ModelState.AddModelError("PassworHash", "Profil Bloklanıb");
+                ModelState.AddModelError("", "Profil Bloklanıb");
                 return View();
             }
-            Microsoft.AspNetCore.Identity.SignInResult signInResault = await _signInManager.PasswordSignInAsync(appUser,user.PasswordHash,user.IsRemember, true);
+            Microsoft.AspNetCore.Identity.SignInResult signInResault = await _signInManager.PasswordSignInAsync(appUser, loginVM.Password,loginVM.IsRemember,true);
             if (signInResault.IsLockedOut)
             {
-                ModelState.AddModelError("PassworHash", "Profil Bloklanıb for 5 dəq.");
+                ModelState.AddModelError("", "Profil Bloklanıb 5 dəq.");
                 return View();
             }
             if (!signInResault.Succeeded)
@@ -47,8 +50,17 @@ namespace TraveAgency.Controllers
                 ModelState.AddModelError("UserName", "Bele username ve ya parol  yoxdur");
                 return View();
             }
-
             return RedirectToAction("Index","Home");
         }
+
+        #region Logout
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("LogIn");
+        }
+
+        #endregion
     }
 }

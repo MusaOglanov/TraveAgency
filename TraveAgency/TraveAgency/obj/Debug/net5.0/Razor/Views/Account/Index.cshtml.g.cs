@@ -26,8 +26,15 @@ using TraveAgency.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\Views\_ViewImports.cshtml"
+using TraveAgency.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"df86f31a0c13da66380dcda58c9fa6f5b6434baa", @"/Views/Account/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9f78e68747dbb3435f5afa061c2f0f5c6e29d6c4", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c8afea7c6044ba1376380f3ea0199a3b11064089", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Account_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable
@@ -68,7 +75,7 @@ using TraveAgency.Models;
         </div>
         <div class=""card-body"">
             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "df86f31a0c13da66380dcda58c9fa6f5b6434baa4899", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "df86f31a0c13da66380dcda58c9fa6f5b6434baa5095", async() => {
                 WriteLiteral("\r\n                <div class=\"form-group\">\r\n                    <label for=\"email\">Email</label>\r\n                    <input id=\"email\" type=\"email\" class=\"form-control\" name=\"email\" tabindex=\"1\"");
                 BeginWriteAttribute("required", " required=\"", 532, "\"", 543, 0);
                 EndWriteAttribute();

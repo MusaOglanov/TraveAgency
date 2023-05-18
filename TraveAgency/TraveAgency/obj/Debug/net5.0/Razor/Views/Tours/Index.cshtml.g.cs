@@ -26,8 +26,15 @@ using TraveAgency.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\Views\_ViewImports.cshtml"
+using TraveAgency.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"efe44ec3bf6aa2f86c11a354e681b1b847aea58e", @"/Views/Tours/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9f78e68747dbb3435f5afa061c2f0f5c6e29d6c4", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c8afea7c6044ba1376380f3ea0199a3b11064089", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Tours_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<Tour>>
     #nullable disable
@@ -70,7 +77,7 @@ using TraveAgency.Models;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<div class=\"col-12\">\r\n    <div class=\"card\">\r\n        <div class=\"d-flex justify-content-between align-items-center\">\r\n            <h5 class=\"card-header\">Tours</h5>\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e7627", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e7823", async() => {
                 WriteLiteral("Create");
             }
             );
@@ -121,7 +128,7 @@ using TraveAgency.Models;
 #line hidden
 #nullable disable
             WriteLiteral("                                    <tr>\r\n                                        <td>\r\n                                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e10398", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e10594", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -248,7 +255,7 @@ AddHtmlAttributeValue("", 1554, item.Image, 1554, 11, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                        </td>\r\n                                        <td>\r\n                                            <div class=\"d-flex justify-content-end\">\r\n                                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e16863", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e17059", async() => {
                 WriteLiteral("\r\n                                                    <i class=\"fas fa-edit mr-1\"></i> Update\r\n                                                ");
             }
             );
@@ -281,7 +288,7 @@ AddHtmlAttributeValue("", 1554, item.Image, 1554, 11, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e19408", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e19604", async() => {
                 WriteLiteral("\r\n                                                    <i class=\"far fa-eye\"></i> Detail\r\n                                                ");
             }
             );
@@ -323,7 +330,7 @@ AddHtmlAttributeValue("", 1554, item.Image, 1554, 11, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e22269", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e22465", async() => {
                 WriteLiteral("  <i class=\"fas fa-trash-alt mr-1\"></i> Activate");
             }
             );
@@ -367,7 +374,7 @@ AddHtmlAttributeValue("", 1554, item.Image, 1554, 11, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e25080", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "efe44ec3bf6aa2f86c11a354e681b1b847aea58e25276", async() => {
                 WriteLiteral("  <i class=\"fas fa-trash-alt mr-1\"></i>DeActivate");
             }
             );

@@ -26,8 +26,15 @@ using TraveAgency.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\Views\_ViewImports.cshtml"
+using TraveAgency.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7a120d291fa6d9ff4fd00525fa60547f57d56a75", @"/Views/Users/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9f78e68747dbb3435f5afa061c2f0f5c6e29d6c4", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c8afea7c6044ba1376380f3ea0199a3b11064089", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Users_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<AppUser>>
     #nullable disable
@@ -68,7 +75,7 @@ using TraveAgency.Models;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<div class=\"col-12\">\r\n    <div class=\"card\">\r\n        <div class=\"d-flex justify-content-between align-items-center\">\r\n            <h5 class=\"card-header\">Users</h5>\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a120d291fa6d9ff4fd00525fa60547f57d56a757092", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a120d291fa6d9ff4fd00525fa60547f57d56a757288", async() => {
                 WriteLiteral("Create");
             }
             );
@@ -183,7 +190,7 @@ using TraveAgency.Models;
 #line hidden
 #nullable disable
             WriteLiteral("                                        </td>\r\n                                        <td>\r\n                                            <div class=\"d-flex justify-content-end\">\r\n                                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a120d291fa6d9ff4fd00525fa60547f57d56a7512918", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a120d291fa6d9ff4fd00525fa60547f57d56a7513114", async() => {
                 WriteLiteral("\r\n                                                    <i class=\"fas fa-edit mr-1\"></i> Update\r\n                                                ");
             }
             );
@@ -216,7 +223,7 @@ using TraveAgency.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a120d291fa6d9ff4fd00525fa60547f57d56a7515463", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a120d291fa6d9ff4fd00525fa60547f57d56a7515659", async() => {
                 WriteLiteral("\r\n                                                    <i class=\"far fa-eye\"></i> Detail\r\n                                                ");
             }
             );
@@ -258,7 +265,7 @@ using TraveAgency.Models;
 #line hidden
 #nullable disable
             WriteLiteral("                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a120d291fa6d9ff4fd00525fa60547f57d56a7518324", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a120d291fa6d9ff4fd00525fa60547f57d56a7518520", async() => {
                 WriteLiteral("  <i class=\"fas fa-check mr-1\"></i> Activate");
             }
             );
@@ -302,7 +309,7 @@ using TraveAgency.Models;
 #line hidden
 #nullable disable
             WriteLiteral("                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a120d291fa6d9ff4fd00525fa60547f57d56a7521130", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a120d291fa6d9ff4fd00525fa60547f57d56a7521326", async() => {
                 WriteLiteral("  <i class=\"fas fa-trash-alt mr-1\"></i>DeActivate");
             }
             );

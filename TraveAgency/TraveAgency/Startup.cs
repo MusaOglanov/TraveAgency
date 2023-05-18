@@ -39,6 +39,7 @@ namespace TraveAgency
                     identityOption.Password.RequireUppercase = true;
                     identityOption.Password.RequireNonAlphanumeric = false;
                     identityOption.Lockout.AllowedForNewUsers = true;
+                    identityOption.Lockout.MaxFailedAccessAttempts = 5;
                     identityOption.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
                     identityOption.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._";
                     identityOption.User.RequireUniqueEmail = true;

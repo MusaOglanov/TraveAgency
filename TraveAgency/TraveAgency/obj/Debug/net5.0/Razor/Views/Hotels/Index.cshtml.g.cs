@@ -26,8 +26,15 @@ using TraveAgency.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\Views\_ViewImports.cshtml"
+using TraveAgency.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b5efaa8c8419eec296107bf60a6bee47898a111a", @"/Views/Hotels/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9f78e68747dbb3435f5afa061c2f0f5c6e29d6c4", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c8afea7c6044ba1376380f3ea0199a3b11064089", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Hotels_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<Hotel>>
     #nullable disable
@@ -70,7 +77,7 @@ using TraveAgency.Models;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<div class=\"col-12\">\r\n    <div class=\"card\">\r\n        <div class=\"d-flex justify-content-between align-items-center\">\r\n            <h5 class=\"card-header\">Hotels</h5>\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5efaa8c8419eec296107bf60a6bee47898a111a7634", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5efaa8c8419eec296107bf60a6bee47898a111a7830", async() => {
                 WriteLiteral("Create");
             }
             );
@@ -121,7 +128,7 @@ using TraveAgency.Models;
 #line hidden
 #nullable disable
             WriteLiteral("                                    <tr>\r\n                                        <td>\r\n                                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "b5efaa8c8419eec296107bf60a6bee47898a111a10487", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "b5efaa8c8419eec296107bf60a6bee47898a111a10683", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -267,7 +274,7 @@ AddHtmlAttributeValue("", 1602, item.HotelImages.FirstOrDefault().Image, 1602, 4
 #line hidden
 #nullable disable
             WriteLiteral("                                        </td>\r\n                                        <td>\r\n                                            <div class=\"d-flex justify-content-end\">\r\n                                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5efaa8c8419eec296107bf60a6bee47898a111a17788", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5efaa8c8419eec296107bf60a6bee47898a111a17984", async() => {
                 WriteLiteral("\r\n                                                    <i class=\"fas fa-edit mr-1\"></i> Update\r\n                                                ");
             }
             );
@@ -300,7 +307,7 @@ AddHtmlAttributeValue("", 1602, item.HotelImages.FirstOrDefault().Image, 1602, 4
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5efaa8c8419eec296107bf60a6bee47898a111a20334", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5efaa8c8419eec296107bf60a6bee47898a111a20530", async() => {
                 WriteLiteral("\r\n                                                    <i class=\"far fa-eye\"></i> Detail\r\n                                                ");
             }
             );
@@ -342,7 +349,7 @@ AddHtmlAttributeValue("", 1602, item.HotelImages.FirstOrDefault().Image, 1602, 4
 #line hidden
 #nullable disable
             WriteLiteral("                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5efaa8c8419eec296107bf60a6bee47898a111a23197", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5efaa8c8419eec296107bf60a6bee47898a111a23393", async() => {
                 WriteLiteral("  <i class=\"fas fa-trash-alt mr-1\"></i> Activate");
             }
             );
@@ -386,7 +393,7 @@ AddHtmlAttributeValue("", 1602, item.HotelImages.FirstOrDefault().Image, 1602, 4
 #line hidden
 #nullable disable
             WriteLiteral("                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5efaa8c8419eec296107bf60a6bee47898a111a26010", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5efaa8c8419eec296107bf60a6bee47898a111a26206", async() => {
                 WriteLiteral("  <i class=\"fas fa-trash-alt mr-1\"></i>DeActivate");
             }
             );

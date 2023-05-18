@@ -54,7 +54,7 @@ namespace TraveAgency.Controllers
         #region post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Hotel hotel, int hotelCatsId, int[] hoteRoomTypesId,
+        public async Task<IActionResult> Create(Hotel hotel, int[] hotelCatsId, int[] hoteRoomTypesId,
             string checkInTime, string checkOutTime,
             string checkInDate, string checkOutDate)
         {
@@ -99,11 +99,7 @@ namespace TraveAgency.Controllers
 
             foreach (int hotelCatId in hotelCatsId)
             {
-                if (hotelCatId == null)
-                {
-                    ModelState.AddModelError("Name", "Category boş ola bilməz");
-                    return View();
-                }
+              
                 HotelHotelCategory hotelHotelCategory = new HotelHotelCategory
                 {
 

@@ -26,8 +26,15 @@ using TraveAgency.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\musac\Desktop\TraveAgency\TraveAgency\TraveAgency\Views\_ViewImports.cshtml"
+using TraveAgency.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a2943454bfcb0509f013211fc5bca76d96e287e7", @"/Views/Airports/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9f78e68747dbb3435f5afa061c2f0f5c6e29d6c4", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c8afea7c6044ba1376380f3ea0199a3b11064089", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Airports_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<Airport>>
     #nullable disable
@@ -66,7 +73,7 @@ using TraveAgency.Models;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<div class=\"col-12\">\r\n    <div class=\"card\">\r\n        <div class=\"d-flex justify-content-between align-items-center\">\r\n            <h5 class=\"card-header\">Airports</h5>\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2943454bfcb0509f013211fc5bca76d96e287e76441", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2943454bfcb0509f013211fc5bca76d96e287e76637", async() => {
                 WriteLiteral("Create");
             }
             );
@@ -173,7 +180,7 @@ using TraveAgency.Models;
 #line hidden
 #nullable disable
             WriteLiteral("                                        </td>\r\n                                        <td>\r\n                                            <div class=\"d-flex justify-content-end\">\r\n                                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2943454bfcb0509f013211fc5bca76d96e287e711997", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2943454bfcb0509f013211fc5bca76d96e287e712193", async() => {
                 WriteLiteral("\r\n                                                    <i class=\"fas fa-edit mr-1\"></i> Update\r\n                                                ");
             }
             );
@@ -215,7 +222,7 @@ using TraveAgency.Models;
 #line hidden
 #nullable disable
             WriteLiteral("                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2943454bfcb0509f013211fc5bca76d96e287e714874", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2943454bfcb0509f013211fc5bca76d96e287e715070", async() => {
                 WriteLiteral("  <i class=\"fas fa-check mr-1\"></i> Activate");
             }
             );
@@ -259,7 +266,7 @@ using TraveAgency.Models;
 #line hidden
 #nullable disable
             WriteLiteral("                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2943454bfcb0509f013211fc5bca76d96e287e717686", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2943454bfcb0509f013211fc5bca76d96e287e717882", async() => {
                 WriteLiteral("  <i class=\"fas fa-trash-alt mr-1\"></i>DeActivate");
             }
             );
