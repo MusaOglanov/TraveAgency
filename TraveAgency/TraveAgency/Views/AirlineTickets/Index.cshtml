@@ -9,7 +9,7 @@
             <div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <table class="table table-striped dataTable no-footer" id="table-1" role="grid" aria-describedby="table-1_info">
+                        <table id="myTable" class="table table-striped dataTable no-footer" role="grid" aria-describedby="table-1_info">
                             <thead>
                                 <tr role="row">
 
@@ -106,4 +106,25 @@
         </div>
     </div>
 </div>
+@section Css{
+    <link rel="stylesheet" href="~/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css " />
+    <link rel="stylesheet" href="~/assets/bundles/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
 
+        }
+@section Scripts{
+    <script src="~/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js "></script>
+    <script src="~/assets/js/page/datatables.js"></script>
+    <script src="~/assets/bundles/datatables/datatables.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/buttons.flash.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/buttons.print.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/dataTables.buttons.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/jszip.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/vfs_fonts.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+        }

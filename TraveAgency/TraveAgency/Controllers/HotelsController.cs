@@ -26,15 +26,20 @@ namespace TraveAgency.Controllers
         }
 
         #region INDEX
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1)
         {
+            int showCount = 3;
+            ViewBag.PageCount = Math.Ceiling((decimal)await _db.Hotels.CountAsync() / showCount);
+
             List<Hotel> hotels = await _db.Hotels
+                .OrderByDescending(x=>x.Id).Skip((page-1)*showCount).Take(showCount)
                 .Include(h => h.HotelDetail)
                 .Include(h => h.HotelImages)
                 .Include(h => h.HotelRoomTypes)
                 .Include(h => h.HotelHotelCategories)
                 .ThenInclude(h => h.HotelCategory)
                 .ToListAsync();
+            ViewBag.CurrentPage = page;
             return View(hotels);
         }
         #endregion

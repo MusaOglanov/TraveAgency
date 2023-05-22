@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -17,9 +18,11 @@ namespace TraveAgency.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _db;
-        public HomeController(AppDbContext db)
+        private readonly SignInManager<AppUser> _signInManager;
+        public HomeController(AppDbContext db, SignInManager<AppUser> signInManager)
         {
             _db = db;
+            _signInManager = signInManager;
         }
         public async Task<IActionResult> Index()
         {
@@ -42,6 +45,15 @@ namespace TraveAgency.Controllers
 
 
 
+        #region Logout
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("LogIn", "Account");
+        }
+
+        #endregion
 
         public IActionResult Error()
         {

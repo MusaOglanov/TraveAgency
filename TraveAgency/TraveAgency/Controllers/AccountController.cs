@@ -53,14 +53,5 @@ namespace TraveAgency.Controllers
             return RedirectToAction("Index","Home");
         }
 
-        #region Logout
-
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("LogIn");
-        }
-
-        #endregion
     }
 }

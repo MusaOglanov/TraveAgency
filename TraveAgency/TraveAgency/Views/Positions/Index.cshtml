@@ -1,75 +1,100 @@
 ﻿@model List<Position>
-
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="d-flex justify-content-between align-items-center">
-                <h5 class="card-header">Positions</h5>
-                <a asp-action="Create" class="btn btn-outline-primary btn-sm" style="margin-right:20px">Create</a>
+<div class="col-12">
+    <div class="card">
+        <div class="d-flex justify-content-between align-items-center card-header">
+            <h4>Postions</h4>
+            <div class="d-flex">
+                <div class="mr-3">
+                    <a asp-action="Create" class="btn btn-outline-primary btn-sm">Create</a>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="table-responsive text-nowrap">
-                    <table id="myTable" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th style="text-align:right">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (Position item in Model)
-                            {
-                                <tr>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="myTable" class="table table-striped table-hover" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th class="sorting_desc" tabindex="0" aria-controls="save-stage" rowspan="1" colspan="1" style="width: 83.781px;" aria-label="Name: activate to sort column ascending" aria-sort="descending">Name</th>
+                            <th class="sorting_desc" tabindex="0" aria-controls="save-stage" rowspan="1" colspan="1" style="width: 83.781px;" aria-label="Status: activate to sort column ascending" aria-sort="descending">Status</th>
+                            @*                                                    <th class="sorting_desc" tabindex="0" aria-controls="save-stage" rowspan="1" colspan="1" style="width: 83.781px;" aria-label="Actions: activate to sort column ascending" aria-sort="descending">Actions</th>
+                            *@
+                            <th style="text-align:right">Actions</th>
 
-                                    <td>
-                                        <i class=" text-danger me-3"></i> <strong>@item.Name</strong>
-                                    </td>
-                                   
-                                    <td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (Position item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    <i class=" text-danger me-3"></i> <strong>@item.Name</strong>
+                                </td>
+
+                                <td>
+                                    @if (item.IsDeactive)
+                                    {
+                                        <span class="text-danger">Passiv</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-success">Active</span>
+                                    }
+                                </td>
+                                <td>
+
+                                    <div class="d-flex justify-content-end">
+                                        <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm" style="margin-right:5px"> <i class="fas fa-edit mr-1"></i>Update</a>
+
+                                        <a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm" style="margin-right:5px"><i class="fas fa-eye mr-1"></i> Detail</a>
+
+
                                         @if (item.IsDeactive)
                                         {
-                                            <span class="text-danger">Passiv</span>
+                                            <a asp-action="Activity" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm" style="margin-right:5px">  <i class="fas fa-check mr-1"></i> Activate</a>
+
                                         }
                                         else
                                         {
-                                            <span class="text-success">Active</span>
+                                            <a asp-action="Activity" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm" style="margin-right:5px">  <i class="fas fa-trash-alt mr-1"></i>DeActivate</a>
+
                                         }
-                                    </td>
-                                    <td>
 
-                                        <div class="d-flex justify-content-end">
-                                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm" style="margin-right:5px"> <i class="fas fa-edit mr-1"></i>Update</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
 
-                                            <a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm" style="margin-right:5px"><i class="fas fa-eye mr-1"></i> Detail</a>
-
-
-                                            @if (item.IsDeactive)
-                                            {
-                                                <a asp-action="Activity" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm" style="margin-right:5px">  <i class="fas fa-check mr-1"></i> Activate</a>
-
-                                            }
-                                            else
-                                            {
-                                                <a asp-action="Activity" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm" style="margin-right:5px">  <i class="fas fa-trash-alt mr-1"></i>DeActivate</a>
-
-                                            }
-
-                                        </div>
-                                    </td>
-                                </tr>
-                            }
-
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+                   
+@section Css{
+    <link rel="stylesheet" href="~/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css " />
+    <link rel="stylesheet" href="~/assets/bundles/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
+
+        }
+@section Scripts{
+    <script src="~/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js "></script>
+    <script src="~/assets/js/page/datatables.js"></script>
+    <script src="~/assets/bundles/datatables/datatables.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/buttons.flash.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/buttons.print.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/dataTables.buttons.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/jszip.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/vfs_fonts.js"></script>
 
 
-
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+        }
 
 
 
