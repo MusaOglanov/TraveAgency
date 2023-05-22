@@ -87,11 +87,18 @@
     <script src="~/assets/bundles/datatables/export-tables/dataTables.buttons.min.js"></script>
     <script src="~/assets/bundles/datatables/export-tables/jszip.min.js"></script>
     <script src="~/assets/bundles/datatables/export-tables/vfs_fonts.js"></script>
-
+    <script src="~/assets/bundles/datatables/export-tables/pdfmake.min.js"></script>
+    <script src="~/assets/bundles/ckeditor/ckeditor.js"></script>
+    <script src="~/assets/js/page/ckeditor.js"></script>
 
     <script>
         $(document).ready(function () {
-            $('#myTable').DataTable();
+            $('#myTable').DataTable({
+                dom:'Bfrtip',
+                buttons:[
+                    'copy','csv','excel','pdf','print'
+                ]
+            });
         });
     </script>
         }
