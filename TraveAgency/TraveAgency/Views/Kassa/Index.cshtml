@@ -1,0 +1,87 @@
+﻿
+@model KassaVM
+<h2>Kasa</h2>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <ul>
+                        
+                            @if (Model.Income.CreateTime > Model.SalaryPaid.CreateTime && Model.Income.CreateTime > Model.Expense.CreateTime)
+                            {
+
+                                <li style="font-weight: bold;">
+                                    <span>Last change time</span> : @Model.Income.CreateTime.ToString("dd.MM.yy hhh:mm:ss")
+                                </li>
+                                <li style="font-weight: bold;">
+                                    <span> Reason for the last change</span> : @Model.Income.About
+                                </li>
+                                <li style="font-weight: bold;">
+                                    <span>The recording person</span> : @Model.Income.AppUser.Name
+                                </li>
+                                <li style="font-weight: bold;">
+                                    <span>Quantity</span> : @Model.Income.Money
+                                </li>
+                            }
+                            else if (Model.SalaryPaid.CreateTime > Model.Income.CreateTime && Model.SalaryPaid.CreateTime > Model.Expense.CreateTime)
+                            {
+                                <li style ="font-weight: bold;">
+                                    <span>Last change time</span>: @Model.SalaryPaid.CreateTime.ToString("dd.MM.yy hhh:mm:ss")
+                                </li>
+                                <li style="font-weight: bold;">
+                                    <span> Reason for the last change</span> : @Model.SalaryPaid.About
+                                </li>
+                                <li style="font-weight: bold;">
+                                    <span>The recording person</span> : @Model.SalaryPaid.AppUser.Name
+                                </li>
+                                <li style="font-weight: bold;">
+                                    <span>Quantity</span> : - @Model.SalaryPaid.Money
+                                </li>
+                            }
+                            else
+                            {
+                                <li style="font-weight: bold;">
+                                    <span>Last change time</span> : @Model.Expense.CreateTime.ToString("dd.MM.yy hhh:mm:ss")
+                                </li>
+                                <li style="font-weight: bold;">
+                                    <span> Reason for the last change</span> : @Model.Expense.About
+                                </li>
+                                <li style="font-weight: bold;">
+                                    <span>The recording person</span> : @Model.Expense.AppUser.Name
+                                </li>
+                                <li style="font-weight: bold;">
+                                    <span>Quantity</span> : - @Model.Expense.Money
+                                </li>
+                            }
+
+                          
+                        </ul>
+                    </div>
+                    <div class="col-4 text-right">
+                        <div>
+                            <div class="card card-statistic-1 l-bg-green">
+                                <div class="card-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="padding-20">
+                                        <div class="text-right">
+                                            <h3 class="font-light mb-0" style="color: black; font-weight: bold;">
+                                                <i class="ti-arrow-up text-success"></i> @Model.Kassa.Money
+                                            </h3>
+                                            <h6 class="font-light mb-0" style="color: black;">Total Amount</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

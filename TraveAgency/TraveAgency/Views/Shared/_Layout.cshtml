@@ -1,10 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var isUserLoggedIn = Context.User.Identity.IsAuthenticated;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <!-- index.html  21 Nov 2019 03:44:50 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Otika - Admin Dashboard Template</title>
+    <title>Travel Agency</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="~/assets/css/app.min.css">
     <!-- Template CSS -->
@@ -20,104 +24,134 @@
     <div class="loader"></div>
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
-            <div class="navbar-bg"></div>
-            <nav class="navbar navbar-expand-lg main-navbar sticky">
-                <div class="form-inline mr-auto">
-                    <ul class="navbar-nav mr-3">
-                        <li>
-                            <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
+            @if (isUserLoggedIn)
+            {
+                <div class="navbar-bg"></div>
+                <nav class="navbar navbar-expand-lg main-navbar sticky">
+                    <div class="form-inline mr-auto">
+                        <ul class="navbar-nav mr-3">
+                            <li>
+                                <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
 									collapse-btn"> <i data-feather="align-justify"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link nav-link-lg fullscreen-btn">
-                                <i data-feather="maximize"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <form class="search-form d-none d-md-block" action="#">
-                                <i class="icon-magnifier"></i>
-                                <input type="search" class="form-control" placeholder="Search Here" title="Search here">
-                            </form>
-                        </li>
-                     </ul>
-                </div>
-                <ul class="navbar-nav navbar-right">
-                    <li>
-                        <a>
-                            @User.Identity.Name
-                        </a>
-                        <br />
-                        <a asp-controller="Home" asp-action="Logout">
-                            Logout
-                        </a>
-
-                    </li>
-                </ul>
-            </nav>
-            <div class="main-sidebar sidebar-style-2">
-                <aside id="sidebar-wrapper">
-                    <div class="sidebar-brand">
-                        <a href="index.html">
-                            <img alt="image" src="~/assets/img/logo.png" class="header-logo" /> <span class="logo-name">Otika</span>
-                        </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link nav-link-lg fullscreen-btn">
+                                    <i data-feather="maximize"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <form class="search-form d-none d-md-block" action="#">
+                                    <i class="icon-magnifier"></i>
+                                    <input type="search" class="form-control" placeholder="Search Here" title="Search here">
+                                </form>
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="sidebar-menu">
-                        <li class="menu-header">Main</li>
-                        <li class="dropdown active">
-                            <a asp-controller="Home" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Home</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="HotelCategories" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>HotelCategories</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="HotelRoomTypes" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>HotelRoomTypes</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="Hotels" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Hotels</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="Airports" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Airports</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="SeatClasses" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Seat Classes</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="AirlineTickets" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Airline Tickets</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="TourCategories" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Tour Categories</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="Tours" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Tours</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="Positions" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Positions</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="Employees" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Employees</span></a>
-                        </li>
+                    <ul class="navbar-nav navbar-right">
+                        <li>
+                            <a>
+                                @User.Identity.Name
+                            </a>
+                            <br />
+                            <a asp-controller="Home" asp-action="Logout">
+                                Logout
+                            </a>
 
-                        <li class="dropdown active">
-                            <a asp-controller="Users" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Users</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="Incomes" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Incomes</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="Expenses" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>Expenses</span></a>
-                        </li>
-                        <li class="dropdown active">
-                            <a asp-controller="PaidedSalaries" asp-action="Index" class="nav-link"><i data-feather="grid"></i><span>PaidedSalaries</span></a>
                         </li>
                     </ul>
-                </aside>
-            </div>
+                </nav>
+
+                <div class="main-sidebar sidebar-style-2">
+                    <aside id="sidebar-wrapper">
+                        <div class="sidebar-brand">
+                            <a href="index.html">
+                                <img alt="image" src="~/assets/img/banner/download.png" class="header-logo" /> <h5>Travel Agency</h5>
+                            </a>
+                        </div>
+                        <ul class="sidebar-menu">
+
+                            <li class="dropdown active">
+                                <a asp-controller="Home" asp-action="Index" class="nav-link"><i data-feather="home"></i><span>Home</span></a>
+                            </li>
+
+                            <li class="menu-header">Hotels</li>
+
+                            <li class="dropdown">
+                                <a class="menu-toggle nav-link has-dropdown"><i class="fas fa-building"></i><span>Hotels & Categories</span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="Hotels" asp-action="Index"><i class="fas fa-hotel"></i><span>Hotels</span></a></li>
+                                    <li><a asp-controller="HotelCategories" asp-action="Index" class="nav-link"><i class="fas fa-list"></i><span>Hotel Categories</span></a></li>
+                                    <li><a asp-controller="HotelRoomTypes" asp-action="Index" class="nav-link"><i class="fas fa-bed"></i><span>Hotel Room Types</span></a></li>
+                                </ul>
+                            </li>
+
+                            <li class="menu-header">Airline Tickets</li>
+
+                            <li class="dropdown ">
+                                <a class=" menu-toggle nav-link has-dropdown"><i class="fas fa-ticket-alt"></i><span>Airline Tickets & Airports</span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a asp-controller="AirlineTickets" asp-action="Index" class="nav-link"><i class="fas fa-ticket-alt"></i><span>Airline Tickets</span></a>
+                                        <a asp-controller="Airports" asp-action="Index" class="nav-link"><i class="fas fa-plane"></i><span>Airports</span></a>
+                                        <a asp-controller="SeatClasses" asp-action="Index" class="nav-link"><i class="fas fa-couch"></i><span>Seat Classes</span></a>
+                                    </li>
+                                </ul>
+
+                            <li class="menu-header">Tours</li>
+
+                            <li class="dropdown ">
+                                <a class="menu-toggle nav-link has-dropdown"><i class="fas fa-map-signs"></i><span>Tours & Categories </span></a>
+                                <ul class="dropdown-menu">
+                                    <a asp-controller="Tours" asp-action="Index" class=" nav-link "><i class="fas fa-globe"></i><span>Tours</span></a>
+                                    <a asp-controller="TourCategories" asp-action="Index" class="nav-link"><i class="fas fa-list"></i><span>Tour Categories</span></a>
+                                </ul>
+                            </li>
+
+                            <li class="menu-header">Employees</li>
+
+                            <li class="dropdown ">
+                                <a class="menu-toggle nav-link has-dropdown"><i class="fas fa-user-tie"></i><span>Employees & Positions</span></a>
+                                <ul class="dropdown-menu">
+
+                                    <a asp-controller="Employees" asp-action="Index" class="nav-link "><i class="fas fa-users"></i><span>Employees</span></a>
+
+                                    <a asp-controller="Positions" asp-action="Index" class="nav-link"><i class="fas fa-user"></i><span>Positions</span></a>
+
+                                </ul>
+                            </li>
+                            <li class="menu-header">Users</li>
+
+                            <li class="dropdown ">
+                                <a asp-controller="Users" asp-action="Index" class="nav-link"><i class="fas fa-user-friends"></i><span>Users</span></a>
+                            </li>
+
+                            <li class="menu-header">Kassa</li>
+                            <li class="dropdown ">
+                                <a class="menu-toggle nav-link has-dropdown"><i class="fas fa-dollar-sign"></i><span>Kassa</span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown ">
+                                        <a asp-controller="Kassa" asp-action="Index" class="nav-link"><i class="fas fa-dollar-sign"></i><span>Kassa</span></a>
+                                    </li>
+                                    <li class="dropdown ">
+                                        <a asp-controller="Incomes" asp-action="Index" class="nav-link"><i class="fas fa-money-bill"></i><span>Incomes</span></a>
+                                    </li>
+                                    <li class="dropdown ">
+                                        <a asp-controller="Expenses" asp-action="Index" class="nav-link"><i class="fas fa-money-bill-alt"></i><span>Expenses</span></a>
+                                    </li>
+                                    <li class="dropdown  ">
+                                        <a asp-controller="PaidedSalaries" asp-action="Index" class="nav-link"><i class="fas fa-money-check-alt"></i><span>Paided Salaries</span></a>
+                                    </li>
+                                </ul>
+                        </ul>
+                    </aside>
+                </div>
+            }
+
             <!-- Main Content -->
             <div class="main-content">
                 @RenderBody()
             </div>
             <footer class="main-footer">
-               
             </footer>
         </div>
     </div>

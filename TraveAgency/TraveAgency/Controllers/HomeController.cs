@@ -26,6 +26,7 @@ namespace TraveAgency.Controllers
         }
         public async Task<IActionResult> Index()
         {
+          
             HomeVM homeVM = new HomeVM
             {
                 Tour = await _db.Tours.FirstOrDefaultAsync(),
@@ -41,10 +42,6 @@ namespace TraveAgency.Controllers
             };
             return View(homeVM);
         }
-
-
-
-
         #region Logout
 
         public async Task<IActionResult> Logout()

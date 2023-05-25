@@ -28,28 +28,32 @@ namespace TraveAgency.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogIn(LoginVM loginVM)
         {
-            AppUser appUser =await _userManager.FindByNameAsync(loginVM.UserName);
-            if (appUser == null)
-            {
-                ModelState.AddModelError("", "Bele username ve ya parol  yoxdur");
-                return View();
-            }
-            if (appUser.IsDeactive)
-            {
-                ModelState.AddModelError("", "Profil Bloklanıb");
-                return View();
-            }
-            Microsoft.AspNetCore.Identity.SignInResult signInResault = await _signInManager.PasswordSignInAsync(appUser, loginVM.Password,loginVM.IsRemember,true);
-            if (signInResault.IsLockedOut)
-            {
-                ModelState.AddModelError("", "Profil Bloklanıb 5 dəq.");
-                return View();
-            }
-            if (!signInResault.Succeeded)
-            {
-                ModelState.AddModelError("UserName", "Bele username ve ya parol  yoxdur");
-                return View();
-            }
+          
+
+                AppUser appUser = await _userManager.FindByNameAsync(loginVM.UserName);
+                if (appUser == null)
+                {
+                    ModelState.AddModelError("", "Bele username ve ya parol  yoxdur");
+                    return View();
+                }
+                if (appUser.IsDeactive)
+                {
+                    ModelState.AddModelError("", "Profil Bloklanıb");
+                    return View();
+                }
+                Microsoft.AspNetCore.Identity.SignInResult signInResault = await _signInManager.PasswordSignInAsync(appUser, loginVM.Password, loginVM.IsRemember, true);
+                if (signInResault.IsLockedOut)
+                {
+                    ModelState.AddModelError("", "Profil Bloklanıb 5 dəq.");
+                    return View();
+                }
+                if (!signInResault.Succeeded)
+                {
+                    ModelState.AddModelError("UserName", "Bele username ve ya parol  yoxdur");
+                    return View();
+                }
+         
+
             return RedirectToAction("Index","Home");
         }
 
