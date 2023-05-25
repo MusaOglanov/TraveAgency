@@ -40,7 +40,7 @@ namespace TraveAgency.Controllers
             bool IsExist = await _db.Positions.AnyAsync(p => p.Name == position.Name);
             if (IsExist)
             {
-                ModelState.AddModelError("Name", "Bu ad daha əvvəl istifadə edilib");
+                ModelState.AddModelError("Name", "This name has been used before");
                 return View();
             }
             await _db.Positions.AddAsync(position);
@@ -88,7 +88,7 @@ namespace TraveAgency.Controllers
             bool IsExist = await _db.Positions.AnyAsync(p => p.Name == position.Name && p.Id != id);
             if (IsExist)
             {
-                ModelState.AddModelError("Name", "Bu ad daha əvvəl istifadə edilib");
+                ModelState.AddModelError("Name", "This name has been used before");
                 return View();
             }
 
@@ -119,6 +119,7 @@ namespace TraveAgency.Controllers
         }
 
         #endregion
+
         #region Activity
         public async Task<IActionResult> Activity(int? id)
         {

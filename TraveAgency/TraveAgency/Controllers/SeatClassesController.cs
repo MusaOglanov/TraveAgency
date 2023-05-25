@@ -42,7 +42,7 @@ namespace TraveAgency.Controllers
             bool IsExist = await _db.SeatClasses.AnyAsync(s => s.Name == seatClass.Name);
             if (IsExist)
             {
-                ModelState.AddModelError("Name", " artıq eyni adlı sinif var");
+                ModelState.AddModelError("Name", " This Class has been used before");
                 return View();
             }
 
@@ -90,7 +90,7 @@ namespace TraveAgency.Controllers
             bool IsExist = await _db.SeatClasses.AnyAsync(s => s.Name == seatClass.Name && s.Id != id);
             if (IsExist)
             {
-                ModelState.AddModelError("Name", " artıq eyni adlı sinif var");
+                ModelState.AddModelError("Name", " This Class has been used before");
                 return View();
             }
             dbSeatClass.Name = seatClass.Name;

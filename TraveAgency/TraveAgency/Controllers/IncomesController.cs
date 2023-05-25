@@ -45,7 +45,7 @@ namespace TraveAgency.Controllers
             var kassa = await _db.Kassa.FirstOrDefaultAsync();
             if (kassa == null)
             {
-                ModelState.AddModelError("", "kassa tapılmadı");
+                ModelState.AddModelError("", "Kassa Not Found");
                 return View();
             }
             income.KassaId = kassa.Id;
@@ -55,7 +55,7 @@ namespace TraveAgency.Controllers
             var user = await _userManager.GetUserAsync(User);
             if(user == null)
             {
-                ModelState.AddModelError("", "User tapılmadı");
+                ModelState.AddModelError("", "User Not Found");
                 return View();
             }
             income.AppUserId = user.Id;

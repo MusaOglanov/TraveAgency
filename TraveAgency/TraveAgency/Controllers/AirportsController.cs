@@ -45,14 +45,14 @@ namespace TraveAgency.Controllers
             bool IsExist = await _db.Airports.AnyAsync(t => t.Name == airport.Name);
             if (IsExist)
             {
-                ModelState.AddModelError("Name", "Bu ad daha əvvəl istifadə olunub");
+                ModelState.AddModelError("Name", "This name has been used before");
                 return View();
             }
             bool IsCodeExist = await _db.Airports.AnyAsync(t => t.Code == airport.Code);
 
             if (IsCodeExist)
             {
-                ModelState.AddModelError("Code", "Bu kod daha əvvəl istifadə olunub");
+                ModelState.AddModelError("Code", "This Code has been used before");
                 return View();
             }
 
@@ -101,7 +101,7 @@ namespace TraveAgency.Controllers
             bool IsExist = await _db.Airports.AnyAsync(t => t.Name == airport.Name && t.Id != id);
             if (IsExist)
             {
-                ModelState.AddModelError("Name", "Bu ad daha əvvəl istifadə olunub");
+                ModelState.AddModelError("Name", "This name has been used before");
                 return View(dbAirport);
             }
 
@@ -109,7 +109,7 @@ namespace TraveAgency.Controllers
             bool IsCodeExist = await _db.Airports.AnyAsync(t => t.Code == airport.Code && t.Id != id);
             if (IsCodeExist)
             {
-                ModelState.AddModelError("Code", "Bu kod daha əvvəl istifadə olunub");
+                ModelState.AddModelError("Code", "This Code has been used before");
                 return View(dbAirport);
             }
             dbAirport.Name = airport.Name;

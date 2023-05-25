@@ -24,9 +24,11 @@ namespace TraveAgency.Controllers
             _db = db;
             _signInManager = signInManager;
         }
+
+        #region Index
         public async Task<IActionResult> Index()
         {
-          
+
             HomeVM homeVM = new HomeVM
             {
                 Tour = await _db.Tours.FirstOrDefaultAsync(),
@@ -40,8 +42,12 @@ namespace TraveAgency.Controllers
                    .FirstOrDefaultAsync(),
 
             };
+
             return View(homeVM);
         }
+        #endregion
+
+
         #region Logout
 
         public async Task<IActionResult> Logout()

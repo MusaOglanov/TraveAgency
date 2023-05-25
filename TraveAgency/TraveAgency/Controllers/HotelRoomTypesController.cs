@@ -90,7 +90,10 @@ namespace TraveAgency.Controllers
 
             bool IsExist = await _db.HotelRoomTypes.AnyAsync(f => f.Name == dbHotelRoomType.Name && f.Id != id);
             if (IsExist)
-
+            {
+                ModelState.AddModelError("Name", "This name already is exist");
+                return View();
+            }
             ViewBag.Hotel = await _db.Hotels.ToListAsync();
 
             dbHotelRoomType.Name = hotelRoomType.Name;
@@ -121,9 +124,6 @@ namespace TraveAgency.Controllers
 
 
         #endregion
-
-
-
 
         #region Activity
         public async Task<IActionResult> Activity(int? id)

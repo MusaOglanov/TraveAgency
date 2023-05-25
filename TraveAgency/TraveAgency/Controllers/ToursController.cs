@@ -51,29 +51,36 @@ namespace TraveAgency.Controllers
         {
             ViewBag.TourCategory = await _db.TourCategories.ToListAsync();
             ViewBag.TourHotel = await _db.Hotels.ToListAsync();
+
+            #region Photo Select&Errors
+
             bool IsExist = await _db.Tours.AnyAsync(t => t.Name == tour.Name);
             if (IsExist)
             {
-                ModelState.AddModelError("Name", "Bu ad daha əvvəl istifadə olunub");
+                ModelState.AddModelError("Name", "This name has been used before");
                 return View();
             }
             if (tour.Photo == null)
             {
-                ModelState.AddModelError("Photo", "Zəhmət olmasa Şəkil seçin");
+                ModelState.AddModelError("Photo", "Please select an image");
                 return View();
             }
             if (!tour.Photo.IsImage())
             {
-                ModelState.AddModelError("Photo", "Zəhmət olmasa Şəkil faylı seçin");
+                ModelState.AddModelError("Photo", "Please select an image file");
                 return View();
             }
             if (tour.Photo.IsOlder2MB())
             {
-                ModelState.AddModelError("Photo", "Seçilə biləcək maxsimum şəkil ölçüsü 2MB-dır");
+                ModelState.AddModelError("Photo", "You can select a file with a maximum size of 2MB");
                 return View();
             }
             string folder = Path.Combine(_env.WebRootPath, "assets", "img");
             tour.Image = await tour.Photo.SaveImageAsync(folder);
+            #endregion
+
+            #region Hotels
+
             List<TourHotel> tourHotels = new List<TourHotel>();
             foreach (int tourHotelId in hotelsId)
             {
@@ -84,6 +91,8 @@ namespace TraveAgency.Controllers
                 tourHotels.Add(tourHotel);
             }
             tour.TourHotels = tourHotels;
+            #endregion
+
             tour.StartDate = startDate;
             tour.EndDate = endDate;
             tour.TourCategoryId = tourCatsId;
@@ -95,7 +104,7 @@ namespace TraveAgency.Controllers
 
         #endregion
 
-        #region MyRegion
+        #region Update
 
         #region get
         public async Task<IActionResult> Update(int? id)
@@ -136,28 +145,33 @@ namespace TraveAgency.Controllers
             ViewBag.TourCategory = await _db.TourCategories.ToListAsync();
             ViewBag.TourHotel = await _db.Hotels.ToListAsync();
 
+            #region Photo Select&Errors
+
             bool IsExist = await _db.Tours.AnyAsync(t => t.Name == tour.Name&&t.Id!=id);
             if (IsExist)
             {
-                ModelState.AddModelError("Name", "Bu ad daha əvvəl istifadə olunub");
+                ModelState.AddModelError("Name", "This name has been used before");
                 return View();
             }
             if (tour.Photo != null)
             {
                 if (!tour.Photo.IsImage())
                 {
-                    ModelState.AddModelError("Photo", "Zəhmət olmasa Şəkil faylı seçin");
+                    ModelState.AddModelError("Photo", "Please select an image file");
                     return View();
                 }
                 if (tour.Photo.IsOlder2MB())
                 {
-                    ModelState.AddModelError("Photo", "Seçilə biləcək maxsimum şəkil ölçüsü 2MB-dır");
+                    ModelState.AddModelError("Photo", "You can select a file with a maximum size of 2MB");
                     return View();
                 }
                 string folder = Path.Combine(_env.WebRootPath, "assets", "img");
                 dbTour.Image = await tour.Photo.SaveImageAsync(folder);
             }
-           
+
+            #endregion
+
+            #region Hotels
 
             List<TourHotel> tourHotels = new List<TourHotel>();
             foreach (int tourHotelId in hotelsId)
@@ -170,6 +184,7 @@ namespace TraveAgency.Controllers
             }
             dbTour.TourHotels = tourHotels;
 
+            #endregion
 
 
             dbTour.Name = tour.Name;

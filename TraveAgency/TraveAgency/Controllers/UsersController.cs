@@ -166,8 +166,6 @@ namespace TraveAgency.Controllers
 
         #endregion
 
-
-
         #region Roles
         public async Task CreateRoles()
         {

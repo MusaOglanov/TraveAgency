@@ -39,7 +39,7 @@ namespace TraveAgency.Controllers
             bool IsExist =await _db.TourCategories.AnyAsync(c => c.Name == category.Name);
             if (IsExist)
             {
-                ModelState.AddModelError("Name", "Bu ad daha əvvəl istifadə edilib");
+                ModelState.AddModelError("Name", "This name has been used before");
                 return View();
             }
             await _db.TourCategories.AddAsync(category);
@@ -85,7 +85,7 @@ namespace TraveAgency.Controllers
             bool IsExist = await _db.TourCategories.AnyAsync(c => c.Name == category.Name&&c.Id!=id);
             if (IsExist)
             {
-                ModelState.AddModelError("Name", "Bu ad daha əvvəl istifadə edilib");
+                ModelState.AddModelError("Name", "This name has been used before");
                 return View();
             }
             dbCategory.Name = category.Name;

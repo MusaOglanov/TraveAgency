@@ -43,16 +43,10 @@ namespace TraveAgency.Controllers
         {
             ViewBag.Positions = await _db.Positions.ToListAsync();
 
-            bool IsExist = await _db.Employees.AnyAsync(e => e.FullName == employee.FullName);
-            if(IsExist)
+             bool isExist = await _db.Employees.AnyAsync(e => e.Email == employee.Email);
+            if(isExist)
             {
-                ModelState.AddModelError("FullName", "Eyni adda işçi artıq mövcuddur");
-                return View();
-            }
-             bool Isexist = await _db.Employees.AnyAsync(e => e.Email == employee.Email);
-            if(Isexist)
-            {
-                ModelState.AddModelError("Email", "Bu email artıq mövcuddur");
+                ModelState.AddModelError("Email", "This Email already exists");
                 return View();
             }
 
@@ -104,16 +98,10 @@ namespace TraveAgency.Controllers
             ViewBag.Positions = await _db.Positions.ToListAsync();
             dbEmployee.PositionId = positionId;
 
-            bool IsExist=await _db.Employees.AnyAsync(e=>e.FullName==employee.FullName&&e.Id!=id);
-            if(IsExist)
-            {
-                ModelState.AddModelError("FullName", "Bu ad daha evvel istifade edilib");
-                return View(dbEmployee);
-            }
             bool Isexist = await _db.Employees.AnyAsync(e => e.Email == employee.Email && e.Id != id);
             if (Isexist)
             {
-                ModelState.AddModelError("Email", "Bu email artıq mövcuddur");
+                ModelState.AddModelError("Email", "This email already exists");
                 return View(dbEmployee);
             }
             dbEmployee.FullName = employee.FullName;

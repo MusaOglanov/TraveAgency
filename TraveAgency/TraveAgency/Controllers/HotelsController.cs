@@ -83,7 +83,7 @@ namespace TraveAgency.Controllers
                 }
                 if (photo.IsOlder2MB())
                 {
-                    ModelState.AddModelError("Photo", "Max 2MB");
+                    ModelState.AddModelError("Photo", "You can select a file with a maximum size of 2MB");
                     return View();
                 }
                 string folder = Path.Combine(_env.WebRootPath, "assets", "img");
@@ -149,7 +149,7 @@ namespace TraveAgency.Controllers
             DateTime currentInTime = DateTime.Now;
             if (checkInDateTime < currentInTime)
             {
-                ModelState.AddModelError("HotelDetail.CheckInTime", "Keçmiş tarixlər seçə bilməzsiniz");
+                ModelState.AddModelError("HotelDetail.CheckInTime", "You cannot select past dates");
                 return View();
             }
             hotel.HotelDetail.CheckInTime = checkInDateTime;
@@ -158,13 +158,13 @@ namespace TraveAgency.Controllers
             DateTime checkOutDateTime = DateTime.Parse(checkOutDateTimeStr);
             if (checkInDateTime > checkOutDateTime)
             {
-                ModelState.AddModelError("HotelDetail.CheckOutTime", "Check In və Check Out Tarixləri eyni ola bilməz");
+                ModelState.AddModelError("HotelDetail.CheckOutTime", "CheckIn and CheckOut dates cannot be the same");
                 return View();
             }
             DateTime currentOutTime = DateTime.Now;
             if (checkOutDateTime < currentOutTime)
             {
-                ModelState.AddModelError("HotelDetail.CheckOutTime", "Keçmiş tarixlər seçə bilməzsiniz");
+                ModelState.AddModelError("HotelDetail.CheckOutTime", "You cannot select past dates");
                 return View();
             }
             hotel.HotelDetail.CheckOutTime = checkOutDateTime;
@@ -245,7 +245,7 @@ namespace TraveAgency.Controllers
                     }
                     if (Photo.IsOlder2MB())
                     {
-                        ModelState.AddModelError("Photo", "Max 2MB");
+                        ModelState.AddModelError("Photo", "You can select a file with a maximum size of 2MB");
                         return View();
                     }
                     string folder = Path.Combine(_env.WebRootPath, "assets", "img");

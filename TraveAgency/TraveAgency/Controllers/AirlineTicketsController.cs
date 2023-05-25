@@ -76,7 +76,7 @@ namespace TraveAgency.Controllers
 
             if (departureDateTime < currentDepDateTime)
             {
-                ModelState.AddModelError("DepartureDateTime", "Keçmiş tarixlər seçə bilməzsiniz");
+                ModelState.AddModelError("DepartureDateTime", "You cannot select past dates");
                 return View();
             }
             ticket.DepartureDateTime = departureDateTime;
@@ -88,7 +88,7 @@ namespace TraveAgency.Controllers
             #region ARRIVAL DATE TIME
             if (arrAirId == depAirId)
             {
-                ModelState.AddModelError("ArrivalAirport", "Uçuş və Eniş Aeroportları eyni ola bilməz");
+                ModelState.AddModelError("ArrivalAirport", "Departure and Arrival Airports cannot be the same");
                 return View();
             }
 
@@ -96,14 +96,14 @@ namespace TraveAgency.Controllers
             DateTime arrivalDateTime = DateTime.Parse(arrivalDateTimeStr);
             if (arrivalDateTime <= departureDateTime)
             {
-                ModelState.AddModelError("ArrivalDateTime", "Uçuş və Eniş tarixləri eyni ola bilməz");
+                ModelState.AddModelError("ArrivalDateTime", "Departure and Arrival dates cannot be the same");
                 return View();
             }
             DateTime currentArrDateTime = DateTime.Now;
 
             if (arrivalDateTime < currentArrDateTime)
             {
-                ModelState.AddModelError("ArrivalDateTime", "Keçmiş tarixlər seçə bilməzsiniz");
+                ModelState.AddModelError("ArrivalDateTime", "You cannot select past dates");
                 return View();
             }
             ticket.ArrivalDateTime = arrivalDateTime;
@@ -118,12 +118,12 @@ namespace TraveAgency.Controllers
             {
                 if (transAirId == 0)
                 {
-                    ModelState.AddModelError("AirlineTicketDetail.TransferPrice", "Lutfen qiyməti daxil edin");
+                    ModelState.AddModelError("AirlineTicketDetail.TransferPrice", "Please enter the price");
                     return View();
                 }
                 if (transAirId == depAirId || transAirId == arrAirId)
                 {
-                    ModelState.AddModelError("TransferAirport", "Aeroportlar eyni ola bilməz");
+                    ModelState.AddModelError("TransferAirport", "Airport Names cannot be identical");
                     return View();
                 }
 
@@ -131,7 +131,7 @@ namespace TraveAgency.Controllers
                 DateTime trasferDateTime = DateTime.Parse(transferDateTimeStr);
                 if (trasferDateTime <= departureDateTime|| trasferDateTime <=arrivalDateTime)
                 {
-                    ModelState.AddModelError("TransferDateTime", "Transfer tarixi Uçuş və ya Eniş tarixləri ilə eynilik təşkil edir");
+                    ModelState.AddModelError("TransferDateTime", "The transfer date cannot be the same as the Departure or Arrival dates");
                     return View();
                 }
                 ticket.AirlineTicketDetail.TransferTime = trasferDateTime;
@@ -149,13 +149,13 @@ namespace TraveAgency.Controllers
 
                 if (returnPriceId == 0)
                 {
-                    ModelState.AddModelError("AirlineTicketDetail.ReturnPrice", "Qiyməti daxil edin");
+                    ModelState.AddModelError("AirlineTicketDetail.ReturnPrice", "Please enter a Price");
                     return View();
                 }
                 
                 if (reAirId == depAirId || reAirId == transAirId)
                 {
-                    ModelState.AddModelError("TransferAirport", "Aeroportlar eyni ola bilməz");
+                    ModelState.AddModelError("TransferAirport", "Airports cannot be the same");
                     return View();
                 }
                 ticket.AirlineTicketDetail.ReturnPrice = returnPriceId;
@@ -164,7 +164,7 @@ namespace TraveAgency.Controllers
                 DateTime returnDateTime = DateTime.Parse(returnDateTimeStr);
                 if (returnDateTime <= departureDateTime || returnDateTime <= arrivalDateTime)
                 {
-                    ModelState.AddModelError("TransferDateTime", "Dönüş tarixi Uçuş və ya Eniş tarixləri ilə eynilik təşkil edir");
+                    ModelState.AddModelError("TransferDateTime", "The Return date is the same as the Departure or Arrival dates");
                     return View();
                 }
                 // KEÇMİŞ TARİXLƏRİ BLOKLAMAQ
@@ -172,7 +172,7 @@ namespace TraveAgency.Controllers
                 DateTime currentReDateTime = DateTime.Now;
                 if (returnDateTime < currentReDateTime)
                 {
-                    ModelState.AddModelError("ReturnDateTime", "Keçmiş tarixlər seçə bilməzsiniz");
+                    ModelState.AddModelError("ReturnDateTime", "You cannot select past dates");
                     return View();
                 }
                 ticket.AirlineTicketDetail.ReturnTime = returnDateTime;
@@ -183,12 +183,12 @@ namespace TraveAgency.Controllers
 
             //-------------------------------BAGGAGE-----------------------------------------
 
-            #region BAGGAGE
+               #region BAGGAGE
             if (ticket.AirlineTicketDetail.HassBaggage)
             {
                 if (baggageId == 0)
                 {
-                    ModelState.AddModelError("AirlineTicketDetail.BaggagePrice", "Lutfen qiym'ti daxil edin");
+                    ModelState.AddModelError("AirlineTicketDetail.BaggagePrice", "Please enter a Price");
                     return View();
                 }
 
@@ -295,7 +295,7 @@ namespace TraveAgency.Controllers
 
             if (departureDateTime < currentDepDateTime)
             {
-                ModelState.AddModelError("DepartureDateTime", "Keçmiş tarixlər seçə bilməzsiniz");
+                ModelState.AddModelError("DepartureDateTime", "You cannot select past dates");
                 return View();
             }
             dbTicket.DepartureDateTime = departureDateTime;
@@ -307,21 +307,21 @@ namespace TraveAgency.Controllers
             #region ARRIVAL Airport
             if (arrAirId == depAirId)
             {
-                ModelState.AddModelError("ArrivalAirport", "Gediş və Eniş Aeroportları eyni ola bilməz");
+                ModelState.AddModelError("ArrivalAirport", "Departure and Arrival Airports cannot be the same");
                 return View();
             }
             string arrivalDateTimeStr = $"{arrivalDate} {arrivalTime}";
             DateTime arrivalDateTime = DateTime.Parse(arrivalDateTimeStr);
             if (arrivalDateTime <= departureDateTime)
             {
-                ModelState.AddModelError("ArrivalDateTime", "Uçuş və Eniş tarixləri eyni ola bilməz");
+                ModelState.AddModelError("ArrivalDateTime", "Departure and arrival dates cannot be the same");
                 return View();
             }
             DateTime currentArrDateTime = DateTime.Now;
 
             if (arrivalDateTime < currentArrDateTime)
             {
-                ModelState.AddModelError("ArrivalDateTime", "Keçmiş tarixlər seçə bilməzsiniz");
+                ModelState.AddModelError("ArrivalDateTime", "You cannot select past dates");
                 return View();
             }
             dbTicket.ArrivalDateTime = arrivalDateTime;

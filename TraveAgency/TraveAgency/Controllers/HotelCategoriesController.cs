@@ -89,7 +89,7 @@ namespace TraveAgency.Controllers
             bool IsExist = await _db.HotelCategories.AnyAsync(f => f.Name == dbHotelCategory.Name && f.Id != id);
             if (IsExist)
             {
-                ModelState.AddModelError("Name", "Bu ad daha Əvvəl istifadə edilib!");
+                ModelState.AddModelError("Name", "This name already is exist");
                 return View(dbHotelCategory);
             }
             dbHotelCategory.Name = hotelCategory.Name;

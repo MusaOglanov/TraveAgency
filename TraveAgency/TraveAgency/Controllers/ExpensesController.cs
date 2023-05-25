@@ -45,22 +45,23 @@ namespace TraveAgency.Controllers
             Kassa kassa = await _db.Kassa.FirstOrDefaultAsync();
             if (kassa == null)
             {
-                ModelState.AddModelError("", "Kassa Tapılmadı");
+                ModelState.AddModelError("", "Kassa Not Found");
                 return View();
             }
             expense.KassaId = kassa.Id;
             if (expense.Money > kassa.Money)
             {
-                ModelState.AddModelError("Money", "Kassada Yetəri qədər məbləğ yoxdur");
+                ModelState.AddModelError("Money", "There are not enough funds in the cash register");
                 return View();
             }
             kassa.Money -= expense.Money;
             _db.Kassa.Update(kassa);
 
+
             AppUser user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                ModelState.AddModelError("", "User Tapılmadı");
+                ModelState.AddModelError("", "User Notfound");
                 return View();
             }
             expense.AppUserId=user.Id;
