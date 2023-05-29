@@ -1,0 +1,106 @@
+﻿@model List<Customer>
+<div class="col-12">
+    <div class="card">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-header">Customers</h5>
+            <a asp-action="Create" class="btn btn-outline-primary btn-sm" style="margin-right:20px">Create</a>
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-striped dataTable no-footer" id="myTable" role="grid" aria-describedby="table-1_info">
+                            <thead>
+                                <tr role="row">
+
+                                    <th>Fullname</th>
+                                    <th>City/Country</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Registration Date</th>
+                                    <th>Status</th>
+                                    <th style="text-align:right">Actions</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (Customer item in Model)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            @item.Name / @item.Surname
+                                        </td>
+
+                                        <td>
+                                            @item.City / @item.Country
+                                        </td>
+
+                                        <td>
+                                            @item.Mobile
+                                        </td>
+
+                                        <td>
+                                            @item.Email
+                                        </td>
+
+                                        <td>
+                                            @item.RegistrationDate.ToString("dd/MMMM/yyy hh:mm")
+                                        </td>
+                                        
+                                        <td>
+                                            <div class="d-flex justify-content-end">
+                                                <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm" style="margin-right:5px">
+                                                    <i class="fas fa-edit mr-1"></i> Update
+                                                </a>
+                                                <a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm" style="margin-right:5px">
+                                                    <i class="far fa-eye"></i> Detail
+                                                </a>
+                                              
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Css{
+    <link rel="stylesheet" href="~/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css " />
+    <link rel="stylesheet" href="~/assets/bundles/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
+
+        }
+@section Scripts{
+    <script src="~/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js "></script>
+    <script src="~/assets/js/page/datatables.js"></script>
+    <script src="~/assets/bundles/datatables/datatables.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/buttons.flash.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/buttons.print.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/dataTables.buttons.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/jszip.min.js"></script>
+    <script src="~/assets/bundles/datatables/export-tables/vfs_fonts.js"></script>
+
+    <script src="~/assets/bundles/datatables/export-tables/pdfmake.min.js"></script>
+    <script src="~/assets/bundles/ckeditor/ckeditor.js"></script>
+    <script src="~/assets/js/page/ckeditor.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+ }

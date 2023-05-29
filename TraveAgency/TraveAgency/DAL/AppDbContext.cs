@@ -30,6 +30,7 @@ namespace TraveAgency.DAL
         public DbSet<Income> Incomes { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<SalaryPaid> SalaryPaids { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

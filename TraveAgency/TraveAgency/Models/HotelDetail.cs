@@ -8,11 +8,16 @@ namespace TraveAgency.Models
     {
         public int Id { get; set; }
         public bool IsDomestic { get; set; }
+        [Required]
         public DateTime CheckInTime { get; set; }
+        [Required]
         public DateTime CheckOutTime { get; set; }
         public string Info { get; set; }
         public string Adress { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        [MaxLength(10)]
         public long PhoneNumber { get; set; }
         public string WebSite { get; set; }
         public double Rating { get; set; }

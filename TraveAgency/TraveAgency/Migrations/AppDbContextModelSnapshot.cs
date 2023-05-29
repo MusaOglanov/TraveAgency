@@ -376,6 +376,48 @@ namespace TraveAgency.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("TraveAgency.Models.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Adress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+                });
+
             modelBuilder.Entity("TraveAgency.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -401,6 +443,7 @@ namespace TraveAgency.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<long>("Mobile")
+                        .HasMaxLength(10)
                         .HasColumnType("bigint");
 
                     b.Property<string>("Notes")
@@ -538,6 +581,7 @@ namespace TraveAgency.Migrations
                         .HasColumnType("bit");
 
                     b.Property<long>("PhoneNumber")
+                        .HasMaxLength(10)
                         .HasColumnType("bigint");
 
                     b.Property<double>("Rating")
@@ -1073,7 +1117,7 @@ namespace TraveAgency.Migrations
                         .IsRequired();
 
                     b.HasOne("TraveAgency.Models.Kassa", "Kassa")
-                        .WithMany()
+                        .WithMany("SalaryPaids")
                         .HasForeignKey("KassaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1150,6 +1194,8 @@ namespace TraveAgency.Migrations
                     b.Navigation("Expenses");
 
                     b.Navigation("Incomes");
+
+                    b.Navigation("SalaryPaids");
                 });
 
             modelBuilder.Entity("TraveAgency.Models.Position", b =>

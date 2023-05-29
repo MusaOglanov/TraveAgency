@@ -9,9 +9,16 @@ namespace TraveAgency.Models
         public int Id { get; set; }
         [Required]
         public string FullName { get; set; }
+        [Required]
         public double Salary { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [MaxLength(10)]
         public long Mobile { get; set; }
         [Required]
+        [DataType(DataType.EmailAddress)]
+
         public string Email { get; set; }
         public DateTime Bithdate { get; set; }
         public DateTime HireDate { get; set; }

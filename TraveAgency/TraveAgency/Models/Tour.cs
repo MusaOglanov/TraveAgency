@@ -16,7 +16,11 @@ namespace TraveAgency.Models
 
         public bool IsDomestic { get; set; }
         public int  Duration { get; set; }
+        [Required]
+
         public DateTime StartDate { get; set; }
+        [Required]
+
         public DateTime EndDate { get; set; }
         [Required]
         public string Country { get; set; }
