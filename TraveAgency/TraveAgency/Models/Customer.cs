@@ -12,7 +12,7 @@ namespace TraveAgency.Models
         public string Surname { get; set; }
 
         [Required]
-        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Geçerli bir telefon numarası giriniz.")]
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Please enter a valid phone number.")]
         public string Mobile { get; set; }
 
         [Required]
